@@ -10,11 +10,14 @@ public class Snake {
         body.add(new Body(start));
     }
 
-    public boolean move() {
+    public boolean move() throws GameOverException {
         Body head = getHead();
         Cell next = head.getContainer().getNeighbor(direction);
-        if (next == null) return false;
-        if (!next.isEmpty() && !(next.getElement() instanceof Food)) return false;
+        if (next == null) throw new GameOverException(GameOverException.Cause.WALL_HIT);
+        if (!next.isEmpty()) {
+            if (next.getElement() instanceof Body) throw new GameOverException(GameOverException.Cause.SNAKE_HIT_ITSELF);
+            if (!(next.getElement() instanceof Food)) throw new GameOverException(GameOverException.Cause.UNKNOWN);
+        }
         if (next.getElement() instanceof Food food) {
             food.remove();
             Body newHead = new Body(next);

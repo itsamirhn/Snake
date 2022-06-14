@@ -24,11 +24,16 @@ public class SView extends JFrame {
         return boardPanel;
     }
 
+    public void showPauseDialog() {
+        // TODO
+    }
+
     public void hidePauseDialog() {
         // TODO
     }
 
-    public void showPauseDialog() {
+    public void showGameOverDialog(String message) {
         // TODO
+        System.err.println(message);
     }
 }

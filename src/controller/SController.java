@@ -1,6 +1,7 @@
 package controller;
 
 import model.Direction;
+import model.GameOverException;
 import model.SModel;
 import view.SView;
 
@@ -61,8 +62,10 @@ public class SController {
     }
 
     public void move(ActionEvent e) {
-        if (model.move()) {
-            view.repaint();
+        try {
+            if (model.move()) view.repaint();
+        } catch (GameOverException err) {
+            gameOver(err);
         }
     }
 
@@ -81,6 +84,12 @@ public class SController {
         paused = false;
         view.hidePauseDialog();
         startTimers();
+    }
+
+    public void gameOver(GameOverException err) {
+        paused = true;
+        stopTimers();
+        view.showGameOverDialog(err.getMessage());
     }
 
 }

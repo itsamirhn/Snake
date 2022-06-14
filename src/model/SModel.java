@@ -18,7 +18,7 @@ public class SModel {
         return snake.changeDirection(direction);
     }
 
-    public boolean move() {
+    public boolean move() throws GameOverException {
         return snake.move();
     }
 

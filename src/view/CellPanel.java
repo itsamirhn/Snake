@@ -14,6 +14,8 @@ public class CellPanel extends JPanel {
 
     private final Cell cell;
 
+    private ElementPanel elementPanel;
+
     public CellPanel(Cell cell) {
         super(new BorderLayout());
         this.cell = cell;
@@ -25,11 +27,9 @@ public class CellPanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        removeAll();
-        ElementPanel elementPanel = ElementPanel.valueOf(cell.getElement());
-        if (elementPanel != null) {
-            elementPanel.setSize(SIZE);
-            add(elementPanel, BorderLayout.CENTER);
-        }
+        if (elementPanel != null) remove(elementPanel);
+        elementPanel = ElementPanel.valueOf(cell.getElement());
+        if (elementPanel != null) add(elementPanel, BorderLayout.CENTER);
+        validate();
     }
 }
