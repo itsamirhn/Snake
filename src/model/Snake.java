@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class Snake {
@@ -12,19 +11,20 @@ public class Snake {
     }
 
     public boolean move() {
-        if (!grow()) return false;
-        Body tail = body.removeLast();
-        tail.getContainer().setElement(null);
-        return true;
-    }
-
-    public boolean grow() {
         Body head = getHead();
         Cell next = head.getContainer().getNeighbor(direction);
         if (next == null) return false;
-        if (!next.isEmpty()) return false;
-        Body newHead = new Body(next);
-        body.addFirst(newHead);
+        if (!next.isEmpty() && !(next.getElement() instanceof Food)) return false;
+        if (next.getElement() instanceof Food food) {
+            food.remove();
+            Body newHead = new Body(next);
+            body.addFirst(newHead);
+        } else {
+            Body newHead = new Body(next);
+            body.addFirst(newHead);
+            Body tail = body.removeLast();
+            tail.remove();
+        }
         return true;
     }
 

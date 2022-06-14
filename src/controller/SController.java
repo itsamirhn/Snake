@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class SController implements DirectionListener {
 
-    public static final int SPEED = 15;
+    public static final int SPEED = 20;
 
     public static final int BOARD_WIDTH = 100;
     public static final int BOARD_HEIGHT = 100;
@@ -24,8 +24,9 @@ public class SController implements DirectionListener {
         view.addKeyListener(this);
         Timer t = new Timer(SPEED, this::move);
         t.start();
-        Timer tt = new Timer(1000, this::grow);
-        tt.start();
+
+        Timer tf = new Timer(2000, this::generateFood);
+        tf.start();
     }
 
     public static void main(String[] args) {
@@ -51,9 +52,8 @@ public class SController implements DirectionListener {
         }
     }
 
-    public void grow(ActionEvent e) {
-        if (model.getSnake().grow()) {
-            view.repaint();
-        }
+    public void generateFood(ActionEvent e) {
+        model.generateFood();
+        view.repaint();
     }
 }

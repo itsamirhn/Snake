@@ -15,4 +15,8 @@ public abstract class Element {
         this.container = container;
         if (this.container != null && this.container.getElement() != this) this.container.setElement(this);
     }
+
+    public void remove() {
+        this.container.setElement(null);
+    }
 }
