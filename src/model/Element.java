@@ -13,6 +13,6 @@ public abstract class Element {
 
     public void setContainer(Cell container) {
         this.container = container;
-        if (this.container.getElement() != this) this.container.setElement(this);
+        if (this.container != null && this.container.getElement() != this) this.container.setElement(this);
     }
 }

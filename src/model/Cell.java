@@ -23,4 +23,13 @@ public class Cell {
     public void setNeighbor(Direction direction, Cell cell) {
         neighborCells.put(direction, cell);
     }
+
+    public boolean isEmpty() {
+        return element == null;
+    }
+
+    @Override
+    public String toString() {
+        return element == null ? " " : element.toString();
+    }
 }
