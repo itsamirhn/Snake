@@ -13,7 +13,7 @@ public class Cell {
 
     public void setElement(Element element) {
         this.element = element;
-        if (this.element.getContainer() != this) this.element.setContainer(this);
+        if (this.element != null && this.element.getContainer() != this) this.element.setContainer(this);
     }
 
     public Cell getNeighbor(Direction direction) {
