@@ -28,8 +28,10 @@ public class Snake {
         return true;
     }
 
-    public void setDirection(Direction direction) {
+    public Direction changeDirection(Direction direction) {
+        if (direction == this.direction.opposite()) return this.direction;
         this.direction = direction;
+        return this.direction;
     }
 
     public Direction getDirection() {

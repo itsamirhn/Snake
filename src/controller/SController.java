@@ -7,7 +7,7 @@ import view.SView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class SController implements DirectionListener {
+public class SController {
 
     public static final int SNAKE_SPEED = 20;
     public static final int FOOD_SPEED = 4000;
@@ -20,9 +20,12 @@ public class SController implements DirectionListener {
 
     private final SModel model = new SModel(BOARD_WIDTH, BOARD_HEIGHT, SNAKE_STARTING_X, SNAKE_STARTING_Y);
     private final SView view = new SView(model);
+    private boolean paused = false;
 
     public SController() {
-        view.addKeyListener(this);
+        view.addKeyListener((DirectionListener) this::changeDirection);
+        view.addKeyListener((EscapeListener) this::changePauseState);
+
         Timer snakeTimer = new Timer(SNAKE_SPEED, this::move);
         snakeTimer.start();
 
@@ -42,18 +45,24 @@ public class SController implements DirectionListener {
         return view;
     }
 
-    @Override
-    public void directionPressed(Direction direction) {
-        model.setDirection(direction);
+    public void changeDirection(Direction direction) {
+        if (paused) return;
+        model.changeDirection(direction);
+    }
+
+    public void changePauseState() {
+        paused = !paused;
     }
 
     public void move(ActionEvent e) {
+        if (paused) return;
         if (model.move()) {
             view.repaint();
         }
     }
 
     public void generateFood(ActionEvent e) {
+        if (paused) return;
         model.generateFood();
         view.repaint();
     }

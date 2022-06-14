@@ -14,8 +14,8 @@ public class SModel {
         snake = new Snake(board.getCell(SNAKE_STARTING_X, SNAKE_STARTING_Y));
     }
 
-    public void setDirection(Direction direction) {
-        snake.setDirection(direction);
+    public Direction changeDirection(Direction direction) {
+        return snake.changeDirection(direction);
     }
 
     public boolean move() {
