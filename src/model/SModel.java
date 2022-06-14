@@ -15,6 +15,14 @@ public class SModel {
 
     }
 
+    public void setDirection(Direction direction) {
+        snake.setDirection(direction);
+    }
+
+    public void move() {
+        snake.move();
+    }
+
     public Board getBoard() {
         return board;
     }
