@@ -35,4 +35,5 @@ public class SModel {
         if (!foods.isEmpty()) foods.get(foods.size() - 1).remove();
         foods.add(food);
     }
+
 }
