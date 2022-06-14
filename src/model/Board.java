@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Arrays;
+import utilitis.SUtils;
 
 public class Board {
     private final int width;
@@ -39,6 +39,20 @@ public class Board {
 
     public int getHeight() {
         return height;
+    }
+
+    public Cell getRandomEmptyCell() {
+        int x = SUtils.getRandomInt(width);
+        int y = SUtils.getRandomInt(height);
+        if (cells[x][y].isEmpty()) {
+            return cells[x][y];
+        }
+        return getRandomEmptyCell();
+    }
+
+    public Food generateRandomFood() {
+        Cell cell = getRandomEmptyCell();
+        return new Food(cell);
     }
 
     @Override

@@ -25,4 +25,8 @@ public class SModel {
     public Snake getSnake() {
         return snake;
     }
+
+    public Food generateFood() {
+        return board.generateRandomFood();
+    }
 }
