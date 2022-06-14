@@ -11,15 +11,21 @@ public class Snake {
         body.add(new Body(start));
     }
 
-    public void move() {
-        Body head = getHead();
-        Cell next = head.getContainer().getNeighbor(direction);
-        if (next == null) return;
-        if (!next.isEmpty()) return;
-        Body newHead = new Body(next);
-        body.addFirst(newHead);
+    public boolean move() {
+        if (!grow()) return false;
         Body tail = body.removeLast();
         tail.getContainer().setElement(null);
+        return true;
+    }
+
+    public boolean grow() {
+        Body head = getHead();
+        Cell next = head.getContainer().getNeighbor(direction);
+        if (next == null) return false;
+        if (!next.isEmpty()) return false;
+        Body newHead = new Body(next);
+        body.addFirst(newHead);
+        return true;
     }
 
     public void setDirection(Direction direction) {

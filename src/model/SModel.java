@@ -14,8 +14,8 @@ public class SModel {
         snake.setDirection(direction);
     }
 
-    public void move() {
-        snake.move();
+    public boolean move() {
+        return snake.move();
     }
 
     public Board getBoard() {
