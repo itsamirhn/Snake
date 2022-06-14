@@ -2,17 +2,12 @@ package model;
 
 public class SModel {
 
-    public static final int BOARD_WIDTH = 100;
-    public static final int BOARD_HEIGHT = 100;
+    private final Board board;
+    private final Snake snake;
 
-    public static final int SNAKE_STARTING_X = BOARD_WIDTH / 2;
-    public static final int SNAKE_STARTING_Y = BOARD_HEIGHT / 2;
-
-    private final Board board = new Board(BOARD_WIDTH, BOARD_HEIGHT);
-    private final Snake snake = new Snake(this.board.getCell(SNAKE_STARTING_X, SNAKE_STARTING_Y));
-
-    public SModel() {
-
+    public SModel(int BOARD_WIDTH, int BOARD_HEIGHT, int SNAKE_STARTING_X, int SNAKE_STARTING_Y) {
+        board = new Board(BOARD_WIDTH, BOARD_HEIGHT);
+        snake = new Snake(board.getCell(SNAKE_STARTING_X, SNAKE_STARTING_Y));
     }
 
     public void setDirection(Direction direction) {
