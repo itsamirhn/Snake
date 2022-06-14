@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 public class Snake {
@@ -12,9 +13,13 @@ public class Snake {
 
     public void move() {
         Body head = getHead();
-        Body next = new Body(head.getContainer().getNeighbor(direction));
-        body.addFirst(next);
-        body.removeLast();
+        Cell next = head.getContainer().getNeighbor(direction);
+        if (next == null) return;
+        if (!next.isEmpty()) return;
+        Body newHead = new Body(next);
+        body.addFirst(newHead);
+        Body tail = body.removeLast();
+        tail.getContainer().setElement(null);
     }
 
     public void setDirection(Direction direction) {
@@ -27,5 +32,9 @@ public class Snake {
 
     public Body getHead() {
         return body.getFirst();
+    }
+
+    public LinkedList<Body> getBody() {
+        return body;
     }
 }

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BoardPanel extends JPanel {
+
     public BoardPanel(Board board) {
        super(new GridLayout(board.getHeight(), board.getWidth()));
         for (int i = 0; i < board.getHeight(); i++) {

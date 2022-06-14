@@ -12,21 +12,24 @@ public class CellPanel extends JPanel {
 
     public static final Dimension SIZE = new Dimension(5, 5);
 
+    private final Cell cell;
+
     public CellPanel(Cell cell) {
         super(new BorderLayout());
+        this.cell = cell;
         setPreferredSize(SIZE);
         setBackground(Color.BLACK);
-        ElementPanel elementPanel = getElementPanel(cell.getElement());
-        if (elementPanel != null) add(elementPanel, BorderLayout.CENTER);
         validate();
     }
 
-    public ElementPanel getElementPanel(Element element) {
-        if (element instanceof Food food) {
-            return new FoodPanel(food);
-        } else if (element instanceof Body body) {
-            return new BodyPanel(body);
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        removeAll();
+        ElementPanel elementPanel = ElementPanel.valueOf(cell.getElement());
+        if (elementPanel != null) {
+            elementPanel.setSize(SIZE);
+            add(elementPanel, BorderLayout.CENTER);
         }
-        return null;
     }
 }

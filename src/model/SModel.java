@@ -26,4 +26,8 @@ public class SModel {
     public Board getBoard() {
         return board;
     }
+
+    public Snake getSnake() {
+        return snake;
+    }
 }
