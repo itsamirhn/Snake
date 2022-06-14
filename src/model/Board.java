@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Board {
     private final int width;
     private final int height;
@@ -18,10 +20,10 @@ public class Board {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (x > 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x - 1][y]);
-                if (x + 1 < width) cells[x][y].setNeighbor(Direction.RIGHT, cells[x + 1][y]);
-                if (y > 0) cells[x][y].setNeighbor(Direction.UP, cells[x][y - 1]);
-                if (y + 1 < height) cells[x][y].setNeighbor(Direction.DOWN, cells[x][y + 1]);
+                if (x > 0) cells[x][y].setNeighbor(Direction.UP, cells[x - 1][y]);
+                if (x + 1 < width) cells[x][y].setNeighbor(Direction.DOWN, cells[x + 1][y]);
+                if (y > 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][y - 1]);
+                if (y + 1 < height) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][y + 1]);
             }
         }
 
@@ -37,5 +39,17 @@ public class Board {
 
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                sb.append(cells[x][y]);
+            }
+            sb.append('\n');
+        }
+        return sb.toString();
     }
 }
