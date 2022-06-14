@@ -51,7 +51,13 @@ public class SController {
     }
 
     public void changePauseState() {
-        paused = !paused;
+        if (paused) {
+            paused = false;
+            view.hidePauseDialog();
+        } else {
+            paused = true;
+            view.showPauseDialog();
+        }
     }
 
     public void move(ActionEvent e) {
