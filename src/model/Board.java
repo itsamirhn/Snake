@@ -50,11 +50,6 @@ public class Board {
         return getRandomEmptyCell();
     }
 
-    public Food generateRandomFood() {
-        Cell cell = getRandomEmptyCell();
-        return new Food(cell);
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

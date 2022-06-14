@@ -3,6 +3,12 @@ package model;
 public abstract class Element {
     private Cell container;
 
+    private boolean removed = false;
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
     public Element(Cell container) {
         this.setContainer(container);
     }
@@ -17,6 +23,7 @@ public abstract class Element {
     }
 
     public void remove() {
+        this.removed = true;
         this.container.setElement(null);
     }
 }
