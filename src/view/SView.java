@@ -41,18 +41,14 @@ public class SView extends JFrame {
 
     private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-        JMenu config = new JMenu("Config");
+        JMenu gameOption = new JMenu("Game");
+        JMenu setting = new JMenu("Setting");
 
-        JMenu level = new JMenu("Level");
-        JMenuItem slow = new JMenuItem("Slow");
-        JMenuItem medium = new JMenuItem("Medium");
-        JMenuItem fast = new JMenuItem("Fast");
+        JMenu newGame = new JMenu("New Game");
 
-        menuBar.add(config);
-        config.add(level);
-        level.add(slow);
-        level.add(medium);
-        level.add(fast);
+        menuBar.add(gameOption);
+        menuBar.add(setting);
+        gameOption.add(newGame);
 
         return menuBar;
     }
