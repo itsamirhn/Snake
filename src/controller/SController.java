@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 
 public class SController {
 
-    public static final int SNAKE_SPEED = 70;
+    public static final int SNAKE_SPEED = 125;
     public static final int FOOD_SPEED = 100;
 
     public static final int BOARD_WIDTH = 20;

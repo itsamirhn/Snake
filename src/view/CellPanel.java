@@ -30,6 +30,6 @@ public class CellPanel extends JPanel {
         if (elementPanel != null) remove(elementPanel);
         elementPanel = ElementPanel.valueOf(cell.getElement());
         if (elementPanel != null) add(elementPanel, BorderLayout.CENTER);
-        validate();
+        revalidate();
     }
 }
