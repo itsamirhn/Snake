@@ -13,15 +13,30 @@ public class SController {
     private final GameController gameController = new GameController(model, view);
 
     public SController() {
+        view.setMenuListener(new MenuListener() {
+            @Override
+            public void startButtonPressed() {
+                view.showView("game");
+                gameController.resume();
+            }
 
+            @Override
+            public void scoreboardButtonPressed() {
+
+            }
+        });
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             SController mainController = new SController();
             mainController.view.setVisible(true);
-            mainController.gameController.startTimers();
+//            mainController.gameController.startTimers();
         });
+    }
+
+    public SModel getModel() {
+        return model;
     }
 
 }
