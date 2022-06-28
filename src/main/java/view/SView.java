@@ -10,7 +10,7 @@ public class SView extends JFrame {
     public SView(SModel model) {
         super("Snake");
 
-        boardPanel = new BoardPanel(model.getBoard());
+        boardPanel = new BoardPanel(model.getGame().getBoard());
         add(boardPanel);
 
         pack();

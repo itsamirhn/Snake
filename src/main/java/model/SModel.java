@@ -1,43 +1,32 @@
 package model;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import controller.Config;
 
 public class SModel {
 
-    private final Board board;
-    private final Snake snake;
-    private final List<Food> foods = new ArrayList<>();
+    private Game game;
 
-    public SModel(Dimension boardDimension) {
-        board = new Board(boardDimension.width, boardDimension.height);
-        snake = new Snake(board.getCell(boardDimension.width / 2, boardDimension.height / 2));
+    public SModel() {
+        newGame();
     }
 
-    public void changeDirection(Direction direction) {
-        snake.changeDirection(direction);
+    public Game getGame() {
+        return game;
     }
 
     public boolean move() throws GameOverException {
-        return snake.move();
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public Snake getSnake() {
-        return snake;
+        return game.move();
     }
 
     public void generateFood() {
-        Food food = new Food(board.getRandomEmptyCell());
-        foods.add(food);
+        game.generateFoodIfNeeded();
     }
 
-    public void generateFoodIfNeeded() {
-        if (foods.isEmpty() || foods.get(foods.size() - 1).isRemoved()) generateFood();
+    public void changeDirection(Direction direction) {
+        game.changeDirection(direction);
     }
 
+    public void newGame() {
+        game = new Game(Config.getInstance().boardDimension);
+    }
 }

@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 
 public class SController {
 
-    private final SModel model = new SModel(Config.getInstance().boardDimension);
+    private final SModel model = new SModel();
     private final SView view = new SView(model);
     private boolean paused = false;
     private final Timer snakeTimer = new Timer(Config.getInstance().snakeSpeed, this::move);
@@ -56,12 +56,13 @@ public class SController {
         try {
             if (model.move()) view.repaint();
         } catch (GameOverException err) {
+            JOptionPane.showMessageDialog(view, model.getGame().getScore());
             gameOver(err);
         }
     }
 
     public void generateFoodIfNeeded(ActionEvent e) {
-        model.generateFoodIfNeeded();
+        model.generateFood();
         view.repaint();
     }
 
