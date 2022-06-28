@@ -5,6 +5,7 @@ import controller.Config;
 public class SModel {
 
     private Game game;
+    private User user;
 
     public SModel() {
         newGame();

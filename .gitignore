@@ -106,3 +106,4 @@ out
 gen
 
 config.toml
+.users.toml

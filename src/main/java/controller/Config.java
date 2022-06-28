@@ -1,10 +1,8 @@
 package controller;
 
-import com.moandjiezana.toml.Toml;
-import com.moandjiezana.toml.TomlWriter;
+import utilitis.SUtils;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 public class Config {
@@ -21,34 +19,31 @@ public class Config {
 
     public Config() { }
     public Config(String filePath) {
-        loadConfig(filePath);
-        saveConfig(filePath);
+        loadFrom(filePath);
     }
 
-    private void loadConfig(String filePath) {
-        File file = new File(filePath);
-        if (!file.exists()) { return; }
-
-        Toml toml = new Toml().read(file);
-        Config config = toml.to(Config.class);
-        this.snakeSpeed = config.snakeSpeed;
-        this.foodSpeed = config.foodSpeed;
-        this.boardDimension = config.boardDimension;
-        this.cellDimension = config.cellDimension;
-    }
-
-    private void saveConfig(String filePath) {
+    public void loadFrom(String filePath) {
         try {
-            File file = new File(filePath);
-            new TomlWriter().write(this, file);
+            Config config = SUtils.loadFromTOML(filePath, Config.class);
+            this.snakeSpeed = config.snakeSpeed;
+            this.foodSpeed = config.foodSpeed;
+            this.boardDimension = config.boardDimension;
+            this.cellDimension = config.cellDimension;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveTo(String filePath) {
+        try {
+            SUtils.saveToTOML(filePath, this);
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
         }
     }
 
     public static void save() {
-        instance.saveConfig(FILE_PATH);
+        instance.saveTo(FILE_PATH);
     }
 
     public static Config getInstance() {
