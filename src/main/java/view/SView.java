@@ -53,4 +53,8 @@ public class SView extends JFrame {
     public void setMenuListener(MenuListener listener) {
         menuPanel.setMenuListener(listener);
     }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
 }

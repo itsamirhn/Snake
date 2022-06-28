@@ -7,6 +7,7 @@ import view.SView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 public class GameController {
 
@@ -19,18 +20,55 @@ public class GameController {
     public GameController(SModel model, SView view) {
         this.model = model;
         this.view = view;
-        view.addKeyListener((DirectionListener) this::changeDirection);
-        view.addKeyListener((EscapeListener) this::changePauseState);
+        bindKeys();
     }
 
-    public void changeDirection(Direction direction) {
-        if (paused) return;
-        model.changeDirection(direction);
+    private void bindKeys() {
+        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escapedPressed");
+        view.getRootPane().getActionMap().put("escapedPressed", new EscapeAction());
+
+        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "upPressed");
+        view.getRootPane().getActionMap().put("upPressed", new DirectionAction(Direction.UP));
+
+        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "downPressed");
+        view.getRootPane().getActionMap().put("downPressed", new DirectionAction(Direction.DOWN));
+
+        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "leftPressed");
+        view.getRootPane().getActionMap().put("leftPressed", new DirectionAction(Direction.LEFT));
+
+        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "rightPressed");
+        view.getRootPane().getActionMap().put("rightPressed", new DirectionAction(Direction.RIGHT));
     }
 
-    public void changePauseState() {
-        if (paused) resume(); else pause();
+    public class DirectionAction extends AbstractAction {
+        private final Direction direction;
+        public DirectionAction(Direction direction) {
+            this.direction = direction;
+        }
+
+        public void changeDirection(Direction direction) {
+            if (paused) return;
+            model.changeDirection(direction);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            changeDirection(direction);
+        }
     }
+
+    public class EscapeAction extends AbstractAction {
+
+        public void changePauseState() {
+            if (paused) resume(); else pause();
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            changePauseState();
+        }
+    }
+
 
     public void startTimers() {
         snakeTimer.start();
