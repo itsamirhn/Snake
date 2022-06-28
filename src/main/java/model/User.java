@@ -15,12 +15,13 @@ public class User {
 
     public static final ArrayList<User> allUsers = loadUsers();
 
+    private String username;
     private String firstName;
     private String lastName;
 
     private int highestScore = 0;
 
-    public User(String firstName, String lastName) {
+    public User(String username, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         User.allUsers.add(this);
@@ -50,8 +51,16 @@ public class User {
         return highestScore;
     }
 
-    public void setHighestScore(int highestScore) {
-        this.highestScore = highestScore;
+    public void setScore(int score) {
+        this.highestScore = Math.max(this.highestScore, score);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public static ArrayList<User> loadUsers() {
@@ -71,6 +80,15 @@ public class User {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static User getUser(String username) {
+        for (User user : User.allUsers) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
 }
