@@ -9,11 +9,6 @@ public class MenuPanel extends JPanel {
 
     private MenuListener menuListener;
 
-    private JLabel aboutLabel = new JLabel("Created By: "
-            + "AmirMohammad Hosseini Nasab" + ", "
-            + "Karo Akhgar" + ", "
-            + "MohammadMatin Shaabani"
-            , SwingConstants.CENTER);
     public MenuPanel() {
         super();
         setLayout(new GridLayout(4, 1));
@@ -29,6 +24,14 @@ public class MenuPanel extends JPanel {
         scoreboardButton.addActionListener(e -> {
             if (menuListener != null) menuListener.scoreboardButtonPressed();
         });
+
+        JLabel aboutLabel = new JLabel("<html>"
+                + "Created By: <br>"
+                + "AmirMohammad Hosseini Nasab" + ", "
+                + "Karo Akhgar" + ", "
+                + "MohammadMatin Shaabani"
+                + "</html>", SwingConstants.CENTER);
+        aboutLabel.setFont(new Font("Arial", Font.PLAIN, 10));
 
         add(snakeLabel);
 
