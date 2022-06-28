@@ -29,4 +29,8 @@ public class SModel {
     public void newGame() {
         game = new Game(Config.getInstance().boardDimension);
     }
+
+    public int getScore() {
+        return game.getScore();
+    }
 }

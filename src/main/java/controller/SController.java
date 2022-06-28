@@ -56,7 +56,6 @@ public class SController {
         try {
             if (model.move()) view.repaint();
         } catch (GameOverException err) {
-            JOptionPane.showMessageDialog(view, model.getGame().getScore());
             gameOver(err);
         }
     }
