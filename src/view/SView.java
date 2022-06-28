@@ -10,6 +10,8 @@ public class SView extends JFrame {
     public SView(SModel model) {
         super("Snake");
 
+        setJMenuBar(createMenuBar());
+
         boardPanel = new BoardPanel(model.getBoard());
         add(boardPanel);
 
@@ -34,5 +36,23 @@ public class SView extends JFrame {
     public void showGameOverDialog(String message) {
         // TODO
         System.err.println(message);
+    }
+
+    private JMenuBar createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu config = new JMenu("Config");
+
+        JMenu level = new JMenu("Level");
+        JMenuItem slow = new JMenuItem("Slow");
+        JMenuItem medium = new JMenuItem("Medium");
+        JMenuItem fast = new JMenuItem("Fast");
+
+        menuBar.add(config);
+        config.add(level);
+        level.add(slow);
+        level.add(medium);
+        level.add(fast);
+
+        return menuBar;
     }
 }
