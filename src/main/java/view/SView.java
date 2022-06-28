@@ -13,6 +13,7 @@ public class SView extends JFrame {
 
     private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
+    private final PausePanel pausePanel;
 
     public SView(SModel model) {
         super("Snake");
@@ -22,9 +23,11 @@ public class SView extends JFrame {
 
         menuPanel = new MenuPanel();
         gamePanel = new GamePanel(model.getGame());
+        pausePanel = new PausePanel();
 
         add(menuPanel, "menu");
         add(gamePanel, "game");
+        setGlassPane(pausePanel);
 
         pack();
 
@@ -33,11 +36,13 @@ public class SView extends JFrame {
     }
 
     public void showPauseDialog() {
-        // TODO
+        pausePanel.setVisible(true);
+        repaint();
     }
 
     public void hidePauseDialog() {
-        // TODO
+        pausePanel.setVisible(false);
+        repaint();
     }
 
     public void showGameOverDialog(String message) {

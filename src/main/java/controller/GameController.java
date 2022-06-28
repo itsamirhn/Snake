@@ -24,20 +24,20 @@ public class GameController {
     }
 
     private void bindKeys() {
-        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escapedPressed");
-        view.getRootPane().getActionMap().put("escapedPressed", new EscapeAction());
+        view.getGamePanel().getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escapedPressed");
+        view.getGamePanel().getRootPane().getActionMap().put("escapedPressed", new EscapeAction());
 
-        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "upPressed");
-        view.getRootPane().getActionMap().put("upPressed", new DirectionAction(Direction.UP));
+        view.getGamePanel().getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "upPressed");
+        view.getGamePanel().getRootPane().getActionMap().put("upPressed", new DirectionAction(Direction.UP));
 
-        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "downPressed");
-        view.getRootPane().getActionMap().put("downPressed", new DirectionAction(Direction.DOWN));
+        view.getGamePanel().getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "downPressed");
+        view.getGamePanel().getRootPane().getActionMap().put("downPressed", new DirectionAction(Direction.DOWN));
 
-        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "leftPressed");
-        view.getRootPane().getActionMap().put("leftPressed", new DirectionAction(Direction.LEFT));
+        view.getGamePanel().getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "leftPressed");
+        view.getGamePanel().getRootPane().getActionMap().put("leftPressed", new DirectionAction(Direction.LEFT));
 
-        view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "rightPressed");
-        view.getRootPane().getActionMap().put("rightPressed", new DirectionAction(Direction.RIGHT));
+        view.getGamePanel().getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "rightPressed");
+        view.getGamePanel().getRootPane().getActionMap().put("rightPressed", new DirectionAction(Direction.RIGHT));
     }
 
     public class DirectionAction extends AbstractAction {
@@ -81,6 +81,7 @@ public class GameController {
     }
 
     public void move(ActionEvent e) {
+        if (paused) return;
         try {
             if (model.move()) view.repaint();
         } catch (GameOverException err) {
@@ -89,6 +90,7 @@ public class GameController {
     }
 
     public void generateFood(ActionEvent e) {
+        if (paused) return;
         model.generateFood();
         view.repaint();
     }
