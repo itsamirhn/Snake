@@ -1,10 +1,7 @@
 package view;
 
 import controller.Config;
-import model.Body;
 import model.Cell;
-import model.Element;
-import model.Food;
 
 import javax.swing.*;
 import java.awt.*;
