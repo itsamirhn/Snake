@@ -8,7 +8,6 @@ import java.awt.*;
 public class BoardPanel extends JPanel {
 
     CellPanel[][] cells;
-
     public BoardPanel(Board board) {
        super(new GridLayout(board.getHeight(), board.getWidth()));
        cells = new CellPanel[board.getHeight()][board.getWidth()];

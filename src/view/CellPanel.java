@@ -1,5 +1,6 @@
 package view;
 
+import controller.Config;
 import model.Body;
 import model.Cell;
 import model.Element;
@@ -11,7 +12,6 @@ import java.awt.*;
 public class CellPanel extends JPanel {
 
     public static int DOT_RADIUS = 1;
-    public static final Dimension SIZE = new Dimension(20, 20);
 
     private final Cell cell;
 
@@ -20,7 +20,7 @@ public class CellPanel extends JPanel {
     public CellPanel(Cell cell) {
         super(new BorderLayout());
         this.cell = cell;
-        setPreferredSize(SIZE);
+        setPreferredSize(Config.getInstance().cellDimension);
         setBackground(Color.BLACK);
         validate();
     }
