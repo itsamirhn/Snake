@@ -22,12 +22,7 @@ public class Config {
     public Config() { }
     public Config(String filePath) {
         loadConfig(filePath);
-        try {
-            saveConfig(filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
+        saveConfig(filePath);
     }
 
     private void loadConfig(String filePath) {
@@ -42,9 +37,18 @@ public class Config {
         this.cellDimension = config.cellDimension;
     }
 
-    private void saveConfig(String filePath) throws IOException {
-        File file = new File(filePath);
-        new TomlWriter().write(this, file);
+    private void saveConfig(String filePath) {
+        try {
+            File file = new File(filePath);
+            new TomlWriter().write(this, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    public static void save() {
+        instance.saveConfig(FILE_PATH);
     }
 
     public static Config getInstance() {
