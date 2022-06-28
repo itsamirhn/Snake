@@ -19,7 +19,7 @@ public class Snake {
             if (!(next.getElement() instanceof Food)) throw new GameOverException(GameOverException.Cause.UNKNOWN);
         }
         if (next.getElement() instanceof Food food) {
-            food.remove();
+            food.eat();
             Body newHead = new Body(next);
             body.addFirst(newHead);
         } else {
@@ -31,10 +31,9 @@ public class Snake {
         return true;
     }
 
-    public Direction changeDirection(Direction direction) {
-        if (direction == this.direction.opposite()) return this.direction;
+    public void changeDirection(Direction direction) {
+        if (direction == this.direction.opposite()) return;
         this.direction = direction;
-        return this.direction;
     }
 
     public Direction getDirection() {
