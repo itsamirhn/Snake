@@ -14,8 +14,8 @@ public class SModel {
         snake = new Snake(board.getCell(SNAKE_STARTING_X, SNAKE_STARTING_Y));
     }
 
-    public Direction changeDirection(Direction direction) {
-        return snake.changeDirection(direction);
+    public void changeDirection(Direction direction) {
+        snake.changeDirection(direction);
     }
 
     public boolean move() throws GameOverException {
@@ -32,8 +32,11 @@ public class SModel {
 
     public void generateFood() {
         Food food = new Food(board.getRandomEmptyCell());
-        if (!foods.isEmpty()) foods.get(foods.size() - 1).remove();
         foods.add(food);
+    }
+
+    public void generateFoodIfNeeded() {
+        if (foods.isEmpty() || foods.get(foods.size() - 1).isRemoved()) generateFood();
     }
 
 }

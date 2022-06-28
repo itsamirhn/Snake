@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class CellPanel extends JPanel {
 
-    public static final Dimension SIZE = new Dimension(5, 5);
+    public static final Dimension SIZE = new Dimension(20, 20);
 
     private final Cell cell;
 

@@ -15,7 +15,6 @@ public class SView extends JFrame {
 
         pack();
 
-        setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

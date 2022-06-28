@@ -10,11 +10,11 @@ import java.awt.event.ActionEvent;
 
 public class SController {
 
-    public static final int SNAKE_SPEED = 30;
-    public static final int FOOD_SPEED = 4000;
+    public static final int SNAKE_SPEED = 70;
+    public static final int FOOD_SPEED = 100;
 
-    public static final int BOARD_WIDTH = 100;
-    public static final int BOARD_HEIGHT = 100;
+    public static final int BOARD_WIDTH = 20;
+    public static final int BOARD_HEIGHT = 20;
 
     public static final int SNAKE_STARTING_X = BOARD_WIDTH / 2;
     public static final int SNAKE_STARTING_Y = BOARD_HEIGHT / 2;
@@ -23,7 +23,7 @@ public class SController {
     private final SView view = new SView(model);
     private boolean paused = false;
     private final Timer snakeTimer = new Timer(SNAKE_SPEED, this::move);
-    private final Timer foodTimer = new Timer(FOOD_SPEED, this::generateFood);
+    private final Timer foodTimer = new Timer(FOOD_SPEED, this::generateFoodIfNeeded);
 
     public SController() {
         view.addKeyListener((DirectionListener) this::changeDirection);
@@ -69,8 +69,8 @@ public class SController {
         }
     }
 
-    public void generateFood(ActionEvent e) {
-        model.generateFood();
+    public void generateFoodIfNeeded(ActionEvent e) {
+        model.generateFoodIfNeeded();
         view.repaint();
     }
 
