@@ -15,6 +15,8 @@ public class SView extends JFrame {
     private final GamePanel gamePanel;
     private final PausePanel pausePanel;
 
+    private String currentViewName = "";
+
     public SView(SModel model) {
         super("Snake");
         setLayout(cardLayout);
@@ -28,6 +30,7 @@ public class SView extends JFrame {
         add(menuPanel, "menu");
         add(gamePanel, "game");
         setGlassPane(pausePanel);
+        showView("menu");
 
         pack();
 
@@ -52,7 +55,12 @@ public class SView extends JFrame {
     }
 
     public void showView(String viewName) {
+        currentViewName = viewName;
         cardLayout.show(getContentPane(), viewName);
+    }
+
+    public String getCurrentViewName() {
+        return currentViewName;
     }
 
     public void setMenuListener(MenuListener listener) {
