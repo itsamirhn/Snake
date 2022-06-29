@@ -3,21 +3,30 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class PausePanel extends JPanel {
-    public PausePanel() {
-        super();
-        setLayout(new GridLayout(2, 1));
+public class GameOverPanel extends JPanel {
 
-        JLabel label = new JLabel("Paused", SwingConstants.CENTER);
+    private final JLabel messageLabel = new JLabel("Good luck next time!", SwingConstants.CENTER);
+
+    public GameOverPanel() {
+        super();
+        setLayout(new GridLayout(3, 1));
+
+        JLabel label = new JLabel("GameOver", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 50));
         label.setForeground(Color.WHITE);
         add(label);
 
-        label = new JLabel("Press Escape key to continue", SwingConstants.CENTER);
-        label.setForeground(Color.WHITE);
-        add(label);
+        messageLabel.setForeground(Color.WHITE);
+        add(messageLabel);
+
+        JButton button = new JButton("Restart");
+        add(button);
 
         setOpaque(false);
+    }
+
+    public void setMessage(String message) {
+        this.messageLabel.setText(message);
     }
 
     @Override

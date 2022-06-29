@@ -14,6 +14,7 @@ public class SView extends JFrame {
     private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
     private final PausePanel pausePanel;
+    private final GameOverPanel gameOverPanel;
 
     private String currentViewName = "";
 
@@ -26,6 +27,7 @@ public class SView extends JFrame {
         menuPanel = new MenuPanel();
         gamePanel = new GamePanel(model.getGame());
         pausePanel = new PausePanel();
+        gameOverPanel = new GameOverPanel();
 
         add(menuPanel, "menu");
         add(gamePanel, "game");
@@ -49,9 +51,9 @@ public class SView extends JFrame {
     }
 
     public void showGameOverDialog(String message) {
-        //TODO
-        JOptionPane.showMessageDialog(this, "Your score is: " + model.getScore());
-        System.err.println(message);
+        setGlassPane(gameOverPanel);
+        gameOverPanel.setMessage(message);
+        gameOverPanel.setVisible(true);
     }
 
     public void showView(String viewName) {
