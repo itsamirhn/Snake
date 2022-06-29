@@ -16,9 +16,9 @@ public class MenuPanel extends SPanel {
         startButton.addActionListener(e -> {
             if (buttonListener != null) buttonListener.startButtonPressed();
         });
-        JButton scoreboardButton = new JButton("Scoreboard");
-        scoreboardButton.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.scoreboardButtonPressed();
+        JButton leaderboardButton = new JButton("Leaderboard");
+        leaderboardButton.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.leaderboardButtonPressed();
         });
 
         JLabel aboutLabel = new JLabel("<html>"
@@ -32,7 +32,7 @@ public class MenuPanel extends SPanel {
         add(snakeLabel);
 
         add(startButton);
-        add(scoreboardButton);
+        add(leaderboardButton);
 
         add(aboutLabel);
 
