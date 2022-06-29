@@ -35,9 +35,31 @@ public class Game {
         Apple apple = new Apple(board.getRandomEmptyCell());
         foods.add(apple);
     }
+    public void forceGenerateBonusFood(){
+        Carrot carrot = new Carrot(board.getRandomEmptyCell());
+        foods.add(carrot);
+    }
 
+    public void generateBonusFoodIfNeeded(){
+        boolean c = true;
+        for(int i = 0;i < foods.size();i++){
+            if(foods.get(i) instanceof BonusFood && !(foods.get(i).isEaten())){
+                c = false;
+                break;
+            }
+        }
+        if(c) {
+            forceGenerateBonusFood();
+        }
+    }
     public void generateFoodIfNeeded() {
-        if (foods.isEmpty() || foods.get(foods.size() - 1).isRemoved()) forceGenerateFood();
+        boolean c = true;
+        for(int i = 0; i < foods.size();i++){
+            if(foods.get(i) instanceof Food && !(foods.get(i) instanceof BonusFood)){
+                c = false;
+            }
+        }
+        if (foods.isEmpty() || c) forceGenerateFood();
     }
 
     public int getScore() {

@@ -96,6 +96,7 @@ public class GameController {
     public void generateFood(ActionEvent e) {
         if (paused) return;
         model.generateFood();
+        model.generateBonusFood();
         view.getGamePanel().repaint();
     }
 

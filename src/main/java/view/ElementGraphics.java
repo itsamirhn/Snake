@@ -1,6 +1,7 @@
 package view;
 
 import model.Body;
+import model.BonusFood;
 import model.Element;
 import model.Food;
 
@@ -14,7 +15,9 @@ public abstract class ElementGraphics {
     static int FOOD_RADIUS = 10;
 
     public static void draw(JComponent container, Graphics2D g2d, Element element) {
-        if (element instanceof Food) {
+        if(element instanceof BonusFood){
+            drawBonusFood(container, g2d);
+        } else if (element instanceof Food) {
             drawFood(container, g2d);
         } else if (element instanceof Body) {
             drawBody(container, g2d);
@@ -29,6 +32,10 @@ public abstract class ElementGraphics {
 
     private static void drawFood(JComponent container, Graphics2D g2d) {
         g2d.setColor(Color.RED);
+        g2d.fillOval(container.getWidth() / 2 - FOOD_RADIUS, container.getHeight() / 2 - FOOD_RADIUS, 2 * FOOD_RADIUS, 2 * FOOD_RADIUS);
+    }
+    private static void drawBonusFood(JComponent container, Graphics2D g2d) {
+        g2d.setColor(Color.YELLOW);
         g2d.fillOval(container.getWidth() / 2 - FOOD_RADIUS, container.getHeight() / 2 - FOOD_RADIUS, 2 * FOOD_RADIUS, 2 * FOOD_RADIUS);
     }
 

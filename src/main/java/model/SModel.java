@@ -26,7 +26,9 @@ public class SModel {
     public void generateFood() {
         game.generateFoodIfNeeded();
     }
-
+    public void generateBonusFood(){
+        game.generateBonusFoodIfNeeded();
+    }
     public void changeDirection(Direction direction) {
         game.changeDirection(direction);
     }
