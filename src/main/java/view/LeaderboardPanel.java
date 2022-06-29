@@ -7,9 +7,10 @@ import java.awt.*;
 
 public class LeaderboardPanel extends JPanel {
     public LeaderboardPanel(User[] users) {
-        super(new GridBagLayout());
+        super(new BorderLayout());
         JTable table = new JTable(new LeaderboardTableModel(users));
+        table.getColumnModel().getColumn(0).setMaxWidth(50);
         JScrollPane scrollPanel = new JScrollPane(table);
-        add(scrollPanel);
+        add(scrollPanel, BorderLayout.CENTER);
     }
 }

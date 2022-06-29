@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class LeaderboardTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = {"Username", "Highest Score"};
+    private final String[] columnNames = {"Rank", "Username", "Highest Score"};
     private final User[] users;
 
     public LeaderboardTableModel(User[] users) {
@@ -25,12 +25,18 @@ public class LeaderboardTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if (columnIndex == 0) return users[rowIndex].getUsername();
-        else return users[rowIndex].getHighestScore();
+        return switch (columnIndex) {
+            case 0 -> rowIndex + 1;
+            case 1 -> users[rowIndex].getUsername();
+            case 2 -> users[rowIndex].getHighestScore();
+            default -> null;
+        };
     }
 
     @Override
     public String getColumnName(int column) {
         return columnNames[column];
     }
+
+
 }
