@@ -20,4 +20,8 @@ public class BoardPanel extends JPanel {
        }
        validate();
     }
+
+    public CellPanel getCellPanel(int x, int y) {
+        return cells[x][y];
+    }
 }

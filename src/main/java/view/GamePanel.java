@@ -8,6 +8,7 @@ import java.awt.*;
 public class GamePanel extends JPanel {
 
     private final Game game;
+    private final BoardPanel boardPanel;
     private final JLabel scoreLabel = new JLabel("Score: 0", SwingConstants.CENTER);
 
     public GamePanel(Game game) {
@@ -19,16 +20,19 @@ public class GamePanel extends JPanel {
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 20));
         scoreLabel.setForeground(Color.WHITE);
 
-        BoardPanel boardPanel = new BoardPanel(game.getBoard());
+        boardPanel = new BoardPanel(game.getBoard());
 
         add(scoreLabel, BorderLayout.NORTH);
         add(boardPanel, BorderLayout.CENTER);
+    }
+
+    public BoardPanel getBoardPanel() {
+        return boardPanel;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         scoreLabel.setText("Score: " + game.getScore());
-        revalidate();
     }
 }

@@ -57,6 +57,10 @@ public class Board {
         return getRandomEmptyCell();
     }
 
+    public Cell[][] getCells() {
+        return cells;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
