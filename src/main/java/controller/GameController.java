@@ -87,7 +87,7 @@ public class GameController {
     public void move(ActionEvent e) {
         if (paused) return;
         try {
-            if (model.move()) view.repaint();
+            if (model.move()) view.getGamePanel().repaint();
         } catch (GameOverException err) {
             gameOver(err);
         }
@@ -96,7 +96,7 @@ public class GameController {
     public void generateFood(ActionEvent e) {
         if (paused) return;
         model.generateFood();
-        view.repaint();
+        view.getGamePanel().repaint();
     }
 
     public void pause() {

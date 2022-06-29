@@ -21,7 +21,7 @@ public class SController implements ButtonListener {
         SwingUtilities.invokeLater(() -> {
             SController mainController = new SController();
             mainController.view.setVisible(true);
-//            mainController.gameController.start(); // Temporary
+            mainController.gameController.start(); // Temporary
         });
     }
 

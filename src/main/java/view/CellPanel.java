@@ -12,23 +12,11 @@ public class CellPanel extends JPanel {
 
     private final Cell cell;
 
-    private ElementPanel elementPanel;
-
     public CellPanel(Cell cell) {
-        super(new BorderLayout());
         this.cell = cell;
         setPreferredSize(Config.getInstance().cellDimension);
         setBackground(Color.BLACK);
         validate();
-    }
-
-    @Override
-    protected void paintChildren(Graphics g) {
-        super.paintChildren(g);
-        if (elementPanel != null) remove(elementPanel);
-        elementPanel = ElementPanel.valueOf(cell.getElement());
-        if (elementPanel != null) add(elementPanel, BorderLayout.CENTER);
-        revalidate();
     }
 
     @Override
@@ -41,5 +29,7 @@ public class CellPanel extends JPanel {
         g2d.fillOval(getWidth() - DOT_RADIUS, - DOT_RADIUS, 2 * DOT_RADIUS, 2 * DOT_RADIUS);
         g2d.fillOval(- DOT_RADIUS, getHeight() - DOT_RADIUS, 2 * DOT_RADIUS, 2 * DOT_RADIUS);
         g2d.fillOval(getWidth() - DOT_RADIUS, getHeight() - DOT_RADIUS, 2 * DOT_RADIUS, 2 * DOT_RADIUS);
+
+        ElementGraphics.draw(this, g2d, cell.getElement());
     }
 }
