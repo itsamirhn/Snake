@@ -11,8 +11,8 @@ public class Config {
     private static final String FILE_PATH = "./config.toml";
     private static final Config instance = new Config(FILE_PATH);
 
-    public int snakeSpeed = 80;
-    public int foodSpeed = 100;
+    public int snakeFPS = 15;
+    public int foodFPS = 3;
 
     public boolean wallHit = false;
 
@@ -28,8 +28,8 @@ public class Config {
     public void loadFrom(String filePath) {
         try {
             Config config = SUtils.loadFromTOML(filePath, Config.class);
-            this.snakeSpeed = config.snakeSpeed;
-            this.foodSpeed = config.foodSpeed;
+            this.snakeFPS = config.snakeFPS;
+            this.foodFPS = config.foodFPS;
             this.wallHit = config.wallHit;
             this.boardDimension = config.boardDimension;
             this.cellDimension = config.cellDimension;

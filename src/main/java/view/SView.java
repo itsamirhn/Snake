@@ -44,6 +44,7 @@ public class SView extends JFrame {
     }
 
     public void showPauseDialog() {
+        setGlassPane(pausePanel);
         pausePanel.setVisible(true);
         repaint();
     }

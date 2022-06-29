@@ -14,8 +14,8 @@ public class GameController {
     private final SModel model;
     private final SView view;
     private boolean paused = false;
-    private final Timer snakeTimer = new Timer(Config.getInstance().snakeSpeed, this::move);
-    private final Timer foodTimer = new Timer(Config.getInstance().foodSpeed, this::generateFood);
+    private final Timer snakeTimer = new Timer(1_000 / Config.getInstance().snakeFPS, this::move);
+    private final Timer foodTimer = new Timer(1_000 / Config.getInstance().foodFPS, this::generateFood);
 
     public GameController(SModel model, SView view) {
         this.model = model;
