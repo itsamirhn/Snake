@@ -9,7 +9,7 @@ import java.awt.*;
 
 public abstract class ElementGraphics {
 
-    static int BODY_STROKE = 2;
+    static int BODY_STROKE = 5;
     static int BODY_ARC_RADIUS = 10;
     static int FOOD_RADIUS = 10;
 

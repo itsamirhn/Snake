@@ -32,8 +32,8 @@ public class Game {
     }
 
     public void forceGenerateFood() {
-        Food food = new Food(board.getRandomEmptyCell());
-        foods.add(food);
+        Apple apple = new Apple(board.getRandomEmptyCell());
+        foods.add(apple);
     }
 
     public void generateFoodIfNeeded() {
