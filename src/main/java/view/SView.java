@@ -23,7 +23,7 @@ public class SView extends JFrame {
         setLayout(cardLayout);
 
         this.model = model;
-
+        setJMenuBar(createMenuBar());
         menuPanel = new MenuPanel();
         gamePanel = new GamePanel(model.getGame());
         pausePanel = new PausePanel();
@@ -55,6 +55,14 @@ public class SView extends JFrame {
         gameOverPanel.setMessage(message);
         gameOverPanel.setVisible(true);
         repaint();
+    }
+
+    private JMenuBar createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu config = new JMenu("Config");
+
+        return menuBar;
     }
 
     private void showView(String viewName) {

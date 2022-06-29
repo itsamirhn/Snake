@@ -55,7 +55,7 @@ public class Game {
     public void generateFoodIfNeeded() {
         boolean c = true;
         for(int i = 0; i < foods.size();i++){
-            if(foods.get(i) instanceof Food && !(foods.get(i) instanceof BonusFood)){
+            if(foods.get(i) instanceof Food && !(foods.get(i) instanceof BonusFood) && !(foods.get(i).isEaten())    ){
                 c = false;
             }
         }

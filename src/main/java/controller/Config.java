@@ -13,6 +13,7 @@ public class Config {
 
     public int snakeSpeed = 80;
     public int foodSpeed = 100;
+    public int bonusFoodSpeed = 10000;
 
     public boolean wallHit = false;
 
@@ -33,6 +34,7 @@ public class Config {
             this.wallHit = config.wallHit;
             this.boardDimension = config.boardDimension;
             this.cellDimension = config.cellDimension;
+            this.bonusFoodSpeed = config.bonusFoodSpeed;
         } catch (FileNotFoundException e) {
             saveTo(filePath);
         }

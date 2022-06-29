@@ -16,6 +16,7 @@ public class GameController {
     private boolean paused = false;
     private final Timer snakeTimer = new Timer(Config.getInstance().snakeSpeed, this::move);
     private final Timer foodTimer = new Timer(Config.getInstance().foodSpeed, this::generateFood);
+    private final Timer bonusFoodTimer = new Timer(Config.getInstance().bonusFoodSpeed, this::generateBonusFood);
 
     public GameController(SModel model, SView view) {
         this.model = model;
@@ -77,11 +78,13 @@ public class GameController {
     public void startTimers() {
         snakeTimer.start();
         foodTimer.start();
+        bonusFoodTimer.start();
     }
 
     public void stopTimers() {
         snakeTimer.stop();
         foodTimer.stop();
+        bonusFoodTimer.stop();
     }
 
     public void move(ActionEvent e) {
@@ -96,6 +99,10 @@ public class GameController {
     public void generateFood(ActionEvent e) {
         if (paused) return;
         model.generateFood();
+        view.getGamePanel().repaint();
+    }
+    public void generateBonusFood(ActionEvent e) {
+        if (paused) return;
         model.generateBonusFood();
         view.getGamePanel().repaint();
     }
