@@ -1,13 +1,9 @@
 package view;
 
-import controller.MenuListener;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuPanel extends JPanel {
-
-    private MenuListener menuListener;
+public class MenuPanel extends SPanel {
 
     public MenuPanel() {
         super();
@@ -18,11 +14,11 @@ public class MenuPanel extends JPanel {
 
         JButton startButton = new JButton("Start");
         startButton.addActionListener(e -> {
-            if (menuListener != null) menuListener.startButtonPressed();
+            if (buttonListener != null) buttonListener.startButtonPressed();
         });
         JButton scoreboardButton = new JButton("Scoreboard");
         scoreboardButton.addActionListener(e -> {
-            if (menuListener != null) menuListener.scoreboardButtonPressed();
+            if (buttonListener != null) buttonListener.scoreboardButtonPressed();
         });
 
         JLabel aboutLabel = new JLabel("<html>"
@@ -41,9 +37,5 @@ public class MenuPanel extends JPanel {
         add(aboutLabel);
 
         validate();
-    }
-
-    public void setMenuListener(MenuListener menuListener) {
-        this.menuListener = menuListener;
     }
 }

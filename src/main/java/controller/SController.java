@@ -5,7 +5,7 @@ import view.SView;
 
 import javax.swing.*;
 
-public class SController {
+public class SController implements ButtonListener {
 
     private final SModel model = new SModel();
     private final SView view = new SView(model);
@@ -13,25 +13,13 @@ public class SController {
     private final GameController gameController = new GameController(model, view);
 
     public SController() {
-        view.setMenuListener(new MenuListener() {
-            @Override
-            public void startButtonPressed() {
-                view.showView("game");
-                gameController.resume();
-            }
-
-            @Override
-            public void scoreboardButtonPressed() {
-
-            }
-        });
+        view.setButtonListener(this);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             SController mainController = new SController();
             mainController.view.setVisible(true);
-//            mainController.gameController.startTimers();
         });
     }
 
@@ -39,4 +27,23 @@ public class SController {
         return model;
     }
 
+    @Override
+    public void startButtonPressed() {
+        gameController.start();
+    }
+
+    @Override
+    public void restartButtonPressed() {
+        gameController.restart();
+    }
+
+    @Override
+    public void saveScoreButtonPressed() {
+
+    }
+
+    @Override
+    public void scoreboardButtonPressed() {
+
+    }
 }

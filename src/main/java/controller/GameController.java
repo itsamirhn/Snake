@@ -113,4 +113,15 @@ public class GameController {
         view.showGameOverDialog(err.getMessage());
     }
 
+    public void start() {
+        view.showView("game");
+        resume();
+    }
+
+    public void restart() {
+        model.createNewGame();
+        view.createNewGamePanel();
+        start();
+    }
+
 }

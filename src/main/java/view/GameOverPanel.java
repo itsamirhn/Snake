@@ -3,24 +3,35 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameOverPanel extends JPanel {
+public class GameOverPanel extends SPanel {
 
     private final JLabel messageLabel = new JLabel("Good luck next time!", SwingConstants.CENTER);
 
     public GameOverPanel() {
         super();
-        setLayout(new GridLayout(3, 1));
+        setLayout(new GridLayout(4, 1));
 
-        JLabel label = new JLabel("GameOver", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 50));
-        label.setForeground(Color.WHITE);
-        add(label);
+        JLabel titleLabel = new JLabel("GameOver", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
+        titleLabel.setForeground(Color.WHITE);
 
+        messageLabel.setFont(new Font("Arial", Font.BOLD, 30));
         messageLabel.setForeground(Color.WHITE);
-        add(messageLabel);
 
-        JButton button = new JButton("Restart");
-        add(button);
+        JButton saveButton = new JButton("Save Score");
+        saveButton.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.saveScoreButtonPressed();
+        });
+
+        JButton restartButton = new JButton("Restart");
+        restartButton.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.restartButtonPressed();
+        });
+
+        add(titleLabel);
+        add(messageLabel);
+        add(saveButton);
+        add(restartButton);
 
         setOpaque(false);
     }

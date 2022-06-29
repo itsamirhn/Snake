@@ -8,7 +8,7 @@ public class SModel {
     private User user;
 
     public SModel() {
-        newGame();
+        createNewGame();
     }
 
     public Game getGame() {
@@ -27,7 +27,7 @@ public class SModel {
         game.changeDirection(direction);
     }
 
-    public void newGame() {
+    public void createNewGame() {
         game = new Game(Config.getInstance().boardDimension);
     }
 

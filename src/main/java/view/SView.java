@@ -1,6 +1,6 @@
 package view;
 
-import controller.MenuListener;
+import controller.ButtonListener;
 import model.SModel;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ public class SView extends JFrame {
     private final CardLayout cardLayout = new CardLayout();
 
     private final MenuPanel menuPanel;
-    private final GamePanel gamePanel;
+    private GamePanel gamePanel;
     private final PausePanel pausePanel;
     private final GameOverPanel gameOverPanel;
 
@@ -54,22 +54,34 @@ public class SView extends JFrame {
         setGlassPane(gameOverPanel);
         gameOverPanel.setMessage(message);
         gameOverPanel.setVisible(true);
+        repaint();
     }
 
     public void showView(String viewName) {
+        getGlassPane().setVisible(false);
         currentViewName = viewName;
         cardLayout.show(getContentPane(), viewName);
+        repaint();
     }
 
     public String getCurrentViewName() {
         return currentViewName;
     }
 
-    public void setMenuListener(MenuListener listener) {
-        menuPanel.setMenuListener(listener);
+    public void setButtonListener(ButtonListener listener) {
+        menuPanel.setButtonListener(listener);
+        gameOverPanel.setButtonListener(listener);
     }
 
     public GamePanel getGamePanel() {
         return gamePanel;
     }
+
+    public void createNewGamePanel() {
+        remove(gamePanel);
+        gamePanel = new GamePanel(model.getGame());
+        add(gamePanel, "game");
+        repaint();
+    }
+
 }
