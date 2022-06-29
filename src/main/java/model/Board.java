@@ -1,5 +1,6 @@
 package model;
 
+import controller.Config;
 import utilitis.SUtils;
 
 public class Board {
@@ -20,10 +21,16 @@ public class Board {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                cells[x][y].setNeighbor(Direction.UP, cells[(x - 1 + width) % width][y]);
-                cells[x][y].setNeighbor(Direction.DOWN, cells[(x + 1) % width][y]);
-                cells[x][y].setNeighbor(Direction.LEFT, cells[x][(y - 1 + height) % height]);
-                cells[x][y].setNeighbor(Direction.RIGHT, cells[x][(y + 1) % height]);
+                if (x > 0) cells[x][y].setNeighbor(Direction.UP, cells[x - 1][y]);
+                if (x + 1 < width) cells[x][y].setNeighbor(Direction.DOWN, cells[x + 1][y]);
+                if (y > 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][y - 1]);
+                if (y + 1 < height) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][y + 1]);
+                if (!Config.getInstance().wallHit) {
+                    if (x == 0) cells[x][y].setNeighbor(Direction.UP, cells[width - 1][y]);
+                    if (x == width - 1) cells[x][y].setNeighbor(Direction.DOWN, cells[0][y]);
+                    if (y == 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][height - 1]);
+                    if (y == height - 1) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][0]);
+                }
             }
         }
 

@@ -3,6 +3,7 @@ package controller;
 import utilitis.SUtils;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Config {
@@ -12,6 +13,8 @@ public class Config {
 
     public int snakeSpeed = 80;
     public int foodSpeed = 100;
+
+    public boolean wallHit = false;
 
     public Dimension boardDimension = new Dimension(20, 20);
     public Dimension cellDimension = new Dimension(20, 20);
@@ -27,10 +30,11 @@ public class Config {
             Config config = SUtils.loadFromTOML(filePath, Config.class);
             this.snakeSpeed = config.snakeSpeed;
             this.foodSpeed = config.foodSpeed;
+            this.wallHit = config.wallHit;
             this.boardDimension = config.boardDimension;
             this.cellDimension = config.cellDimension;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            saveTo(filePath);
         }
     }
 
