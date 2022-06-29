@@ -57,11 +57,18 @@ public class SView extends JFrame {
         repaint();
     }
 
-    public void showView(String viewName) {
+    private void showView(String viewName) {
         getGlassPane().setVisible(false);
         currentViewName = viewName;
         cardLayout.show(getContentPane(), viewName);
         repaint();
+    }
+
+    public void showMenu() {
+        showView("menu");
+    }
+    public void showGame() {
+        showView("game");
     }
 
     public String getCurrentViewName() {
@@ -82,6 +89,10 @@ public class SView extends JFrame {
         gamePanel = new GamePanel(model.getGame());
         add(gamePanel, "game");
         repaint();
+    }
+
+    public String showAuth() {
+        return JOptionPane.showInputDialog(this, "Username:", "Auth");
     }
 
 }

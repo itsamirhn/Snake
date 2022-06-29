@@ -16,35 +16,12 @@ public class User {
     public static final ArrayList<User> allUsers = loadUsers();
 
     private String username;
-    private String firstName;
-    private String lastName;
 
     private int highestScore = 0;
 
-    public User(String username, String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String username) {
+        this.username = username;
         User.allUsers.add(this);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFullName() {
-        return firstName + " " + lastName;
     }
 
     public int getHighestScore() {
@@ -65,7 +42,7 @@ public class User {
 
     public static ArrayList<User> loadUsers() {
         try {
-            List<User> users = SUtils.loadTOML(USERS_FILE_PATH).getList("users");
+            List<User> users = SUtils.loadTOML(USERS_FILE_PATH).getTables("users").stream().map(toml -> toml.to(User.class)).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
             return new ArrayList<>(users);
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
@@ -89,6 +66,12 @@ public class User {
             }
         }
         return null;
+    }
+
+    public static User getOrCreate(String username) {
+        User user = getUser(username);
+        if (user == null) user = new User(username);
+        return user;
     }
 
 }

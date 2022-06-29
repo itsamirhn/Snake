@@ -15,6 +15,10 @@ public class SModel {
         return game;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public boolean move() throws GameOverException {
         return game.move();
     }
@@ -33,5 +37,15 @@ public class SModel {
 
     public int getScore() {
         return game.getScore();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setScore() {
+        if (user == null) return;
+        user.setScore(game.getScore());
+        User.saveUsers();
     }
 }

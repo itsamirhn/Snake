@@ -40,6 +40,10 @@ public class GameController {
         view.getGamePanel().getRootPane().getActionMap().put("rightPressed", new DirectionAction(Direction.RIGHT));
     }
 
+    public void saveScore() {
+        model.setScore();
+    }
+
     public class DirectionAction extends AbstractAction {
         private final Direction direction;
         public DirectionAction(Direction direction) {
@@ -114,7 +118,7 @@ public class GameController {
     }
 
     public void start() {
-        view.showView("game");
+        show();
         resume();
     }
 
@@ -122,6 +126,10 @@ public class GameController {
         model.createNewGame();
         view.createNewGamePanel();
         start();
+    }
+
+    public void show() {
+        view.showGame();
     }
 
 }

@@ -11,6 +11,7 @@ public class SController implements ButtonListener {
     private final SView view = new SView(model);
 
     private final GameController gameController = new GameController(model, view);
+    private final AuthController authController = new AuthController(model, view);
 
     public SController() {
         view.setButtonListener(this);
@@ -20,6 +21,7 @@ public class SController implements ButtonListener {
         SwingUtilities.invokeLater(() -> {
             SController mainController = new SController();
             mainController.view.setVisible(true);
+//            mainController.gameController.start(); // Temporary
         });
     }
 
@@ -39,7 +41,8 @@ public class SController implements ButtonListener {
 
     @Override
     public void saveScoreButtonPressed() {
-
+        if (authController.isAuthenticated()) gameController.saveScore();
+        else authController.show();
     }
 
     @Override
