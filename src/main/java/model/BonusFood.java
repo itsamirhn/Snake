@@ -1,22 +1,10 @@
 package model;
 
-public class BonusFood extends Food{
-    private int destroy = 50;
-    public int getDestroy(){
-        return this.destroy;
-    }
-    private boolean isRemoved = false;
-    public void setDestroy(int destroy){
-        this.destroy = destroy;
-    }
-    public void checkdestroy(){
-        if(this.destroy == 0){
-            this.remove();
-            this.isRemoved = true;
-        }
-    }
-    public boolean isRemoved(){
-        return this.isRemoved;
+public class BonusFood extends Food {
+    private int timer = 30;
+    public void tiktok() {
+        timer--;
+        if (timer == 0) this.remove();
     }
     @Override
     public int getScore() {

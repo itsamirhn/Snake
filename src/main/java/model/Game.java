@@ -20,13 +20,7 @@ public class Game {
     }
 
     public boolean move() throws GameOverException {
-        for(Food food: foods){
-            if(food instanceof BonusFood){
-                ((BonusFood) food).setDestroy(((BonusFood) food).getDestroy() -1);
-                ((BonusFood) food).checkdestroy();
-            }
-        }
-
+        for(Food food: foods) if (food instanceof BonusFood bonusFood) bonusFood.tiktok();
         return snake.move();
     }
 
@@ -48,25 +42,12 @@ public class Game {
     }
 
     public void generateBonusFoodIfNeeded(){
-        boolean c = true;
-        for(Food food : foods){
-            if(food instanceof BonusFood && !(food.isRemoved())){
-                c = false;
-                break;
-            }
-        }
-        if(c) {
-            forceGenerateBonusFood();
-        }
+        boolean c = foods.stream().noneMatch(food -> food instanceof BonusFood && !food.isRemoved());
+        if (c) forceGenerateBonusFood();
     }
     public void generateFoodIfNeeded() {
-        boolean c = true;
-        for(Food food : foods){
-            if(!(food instanceof BonusFood) && !(food.isEaten())){
-                c = false;
-            }
-        }
-        if (foods.isEmpty() || c) forceGenerateFood();
+        boolean c = foods.stream().noneMatch(food -> !(food instanceof BonusFood) && !food.isRemoved());
+        if (c) forceGenerateFood();
     }
 
     public int getScore() {
