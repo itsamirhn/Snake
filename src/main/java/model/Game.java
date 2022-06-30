@@ -20,7 +20,7 @@ public class Game {
     }
 
     public boolean move() throws GameOverException {
-        for(Food food: foods) if (food instanceof BonusFood bonusFood) bonusFood.tiktok();
+        for (Food food: foods) if (food instanceof BonusFood bonusFood && !food.isRemoved()) bonusFood.tiktok();
         return snake.move();
     }
 
