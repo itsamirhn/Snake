@@ -30,9 +30,8 @@ public class GamePanel extends JPanel {
         return boardPanel;
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void updateScoreLabel() {
         scoreLabel.setText("Score: " + game.getScore());
     }
+
 }

@@ -1,11 +1,13 @@
 package model;
 
+import controller.SnakeListener;
+
 import java.util.LinkedList;
 
 public class Snake {
     private final LinkedList<Body> body = new LinkedList<>();
     private Direction direction = Direction.RIGHT;
-
+    private SnakeListener listener;
     public Snake(Cell start) {
         body.add(new Body(start));
     }
@@ -14,12 +16,14 @@ public class Snake {
         Body head = getHead();
         Cell next = head.getContainer().getNeighbor(direction);
         if (next == null) throw new GameOverException(GameOverException.Cause.WALL_HIT);
-        if (!next.isEmpty()) {
-            if (next.getElement() instanceof Body) throw new GameOverException(GameOverException.Cause.SNAKE_HIT_ITSELF);
-            if (!(next.getElement() instanceof Food)) throw new GameOverException(GameOverException.Cause.UNKNOWN);
+        Element nextElement = next.getElement();
+        if (nextElement != null) {
+            if (nextElement instanceof Body) throw new GameOverException(GameOverException.Cause.SNAKE_HIT_ITSELF);
+            if (!(nextElement instanceof Food)) throw new GameOverException(GameOverException.Cause.UNKNOWN);
         }
-        if (next.getElement() instanceof Food food) {
+        if (nextElement instanceof Food food) {
             food.eat();
+            if (listener != null) listener.foodEaten(food);
             Body newHead = new Body(next);
             body.addFirst(newHead);
         } else {
@@ -46,5 +50,9 @@ public class Snake {
 
     public LinkedList<Body> getBody() {
         return body;
+    }
+
+    public void setListener(SnakeListener listener) {
+        this.listener = listener;
     }
 }

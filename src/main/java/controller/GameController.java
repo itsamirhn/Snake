@@ -38,6 +38,18 @@ public class GameController {
         }
     }
 
+    private void setSnakeListener() {
+        model.getGame().getSnake().setListener(food -> {
+            // TODO: Play Sound
+            view.getGamePanel().updateScoreLabel();
+        });
+    }
+
+    public void setListeners() {
+        setCellListeners();
+        setSnakeListener();
+    }
+
     private void bindKeys() {
         view.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escapedPressed");
         view.getRootPane().getActionMap().put("escapedPressed", new EscapeAction());
@@ -138,7 +150,7 @@ public class GameController {
     }
 
     public void start() {
-        setCellListeners();
+        setListeners();
         show();
         resume();
     }

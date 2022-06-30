@@ -2,6 +2,6 @@ package controller;
 
 import model.Cell;
 
-public interface CellUpdateListener {
+public interface CellListener {
     void cellUpdated(Cell cell);
 }

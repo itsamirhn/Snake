@@ -1,13 +1,13 @@
 package model;
 
-import controller.CellUpdateListener;
+import controller.CellListener;
 
 import java.util.EnumMap;
 
 public class Cell {
 
     private Element element;
-    private CellUpdateListener listener;
+    private CellListener listener;
     private final EnumMap<Direction, Cell> neighborCells = new EnumMap<>(Direction.class);
 
     public Element getElement() {
@@ -32,7 +32,7 @@ public class Cell {
         return element == null;
     }
 
-    public void setListener(CellUpdateListener listener) {
+    public void setListener(CellListener listener) {
         this.listener = listener;
     }
 
