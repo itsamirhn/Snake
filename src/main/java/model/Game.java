@@ -20,6 +20,13 @@ public class Game {
     }
 
     public boolean move() throws GameOverException {
+        for(Food food: foods){
+            if(food instanceof BonusFood){
+                ((BonusFood) food).setDestroy(((BonusFood) food).getDestroy() -1);
+                ((BonusFood) food).checkdestroy();
+            }
+        }
+
         return snake.move();
     }
 
@@ -32,18 +39,18 @@ public class Game {
     }
 
     public void forceGenerateFood() {
-        Apple apple = new Apple(board.getRandomEmptyCell());
-        foods.add(apple);
+        Food food = new Food(board.getRandomEmptyCell());
+        foods.add(food);
     }
     public void forceGenerateBonusFood(){
-        Carrot carrot = new Carrot(board.getRandomEmptyCell());
-        foods.add(carrot);
+        BonusFood bonusfood = new BonusFood(board.getRandomEmptyCell());
+        foods.add(bonusfood);
     }
 
     public void generateBonusFoodIfNeeded(){
         boolean c = true;
-        for(int i = 0;i < foods.size();i++){
-            if(foods.get(i) instanceof BonusFood && !(foods.get(i).isEaten())){
+        for(Food food : foods){
+            if(food instanceof BonusFood && !(food.isRemoved())){
                 c = false;
                 break;
             }
@@ -54,8 +61,8 @@ public class Game {
     }
     public void generateFoodIfNeeded() {
         boolean c = true;
-        for(int i = 0; i < foods.size();i++){
-            if(foods.get(i) instanceof Food && !(foods.get(i) instanceof BonusFood) && !(foods.get(i).isEaten())    ){
+        for(Food food : foods){
+            if(!(food instanceof BonusFood) && !(food.isEaten())){
                 c = false;
             }
         }

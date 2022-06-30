@@ -103,6 +103,7 @@ public class GameController {
     }
     public void generateBonusFood(ActionEvent e) {
         if (paused) return;
+//        System.out.println(bonusFoodTimer.getDelay());
         model.generateBonusFood();
         view.getGamePanel().repaint();
     }
