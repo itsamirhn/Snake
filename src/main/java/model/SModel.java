@@ -50,4 +50,8 @@ public class SModel {
         user.setScore(game.getScore());
         User.saveUsers();
     }
+
+    public User[] getLeaderboard() {
+        return User.allUsers.stream().sorted((x, y) -> y.getHighestScore() - x.getHighestScore()).toArray(User[]::new);
+    }
 }

@@ -1,10 +1,13 @@
 package model;
 
+import controller.CellUpdateListener;
+
 import java.util.EnumMap;
 
 public class Cell {
 
     private Element element;
+    private CellUpdateListener listener;
     private final EnumMap<Direction, Cell> neighborCells = new EnumMap<>(Direction.class);
 
     public Element getElement() {
@@ -14,6 +17,7 @@ public class Cell {
     public void setElement(Element element) {
         this.element = element;
         if (this.element != null && this.element.getContainer() != this) this.element.setContainer(this);
+        if (listener != null) listener.cellUpdated(this);
     }
 
     public Cell getNeighbor(Direction direction) {
@@ -26,6 +30,10 @@ public class Cell {
 
     public boolean isEmpty() {
         return element == null;
+    }
+
+    public void setListener(CellUpdateListener listener) {
+        this.listener = listener;
     }
 
     @Override

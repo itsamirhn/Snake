@@ -1,5 +1,6 @@
 package controller;
 
+import model.Cell;
 import model.Direction;
 import model.GameOverException;
 import model.SModel;
@@ -14,14 +15,27 @@ public class GameController {
     private final SModel model;
     private final SView view;
     private boolean paused = false;
-    private final Timer snakeTimer = new Timer(Config.getInstance().snakeSpeed, this::move);
-    private final Timer foodTimer = new Timer(Config.getInstance().foodSpeed, this::generateFood);
-    private final Timer bonusFoodTimer = new Timer(Config.getInstance().bonusFoodSpeed, this::generateBonusFood);
+    private final Timer snakeTimer = new Timer(1_000 / Config.getInstance().snakeFPS, this::move);
+    private final Timer foodTimer = new Timer(1_000 / Config.getInstance().foodFPS, this::generateFood);
+    private final Timer bonusFoodTimer = new Timer(Config.getInstance().bonusFoodInterval, this::generateBonusFood);
 
     public GameController(SModel model, SView view) {
         this.model = model;
         this.view = view;
         bindKeys();
+    }
+
+    private void setCellListeners() {
+        int width = model.getGame().getBoard().getWidth();
+        int height = model.getGame().getBoard().getHeight();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Cell modelCell = model.getGame().getBoard().getCell(x, y);
+                int finalX = x;
+                int finalY = y;
+                modelCell.setListener(cell -> view.getGamePanel().getBoardPanel().getCellPanel(finalX, finalY).repaint());
+            }
+        }
     }
 
     private void bindKeys() {
@@ -90,7 +104,7 @@ public class GameController {
     public void move(ActionEvent e) {
         if (paused) return;
         try {
-            if (model.move()) view.getGamePanel().repaint();
+            model.move();
         } catch (GameOverException err) {
             gameOver(err);
         }
@@ -99,13 +113,10 @@ public class GameController {
     public void generateFood(ActionEvent e) {
         if (paused) return;
         model.generateFood();
-        view.getGamePanel().repaint();
     }
     public void generateBonusFood(ActionEvent e) {
         if (paused) return;
-//        System.out.println(bonusFoodTimer.getDelay());
         model.generateBonusFood();
-        view.getGamePanel().repaint();
     }
 
     public void pause() {
@@ -127,6 +138,7 @@ public class GameController {
     }
 
     public void start() {
+        setCellListeners();
         show();
         resume();
     }

@@ -15,6 +15,7 @@ public class SView extends JFrame {
     private GamePanel gamePanel;
     private final PausePanel pausePanel;
     private final GameOverPanel gameOverPanel;
+    private final LeaderboardPanel leaderboardPanel;
 
     private String currentViewName = "";
 
@@ -28,9 +29,11 @@ public class SView extends JFrame {
         gamePanel = new GamePanel(model.getGame());
         pausePanel = new PausePanel();
         gameOverPanel = new GameOverPanel();
+        leaderboardPanel = new LeaderboardPanel(model.getLeaderboard());
 
         add(menuPanel, "menu");
         add(gamePanel, "game");
+        add(leaderboardPanel, "leaderboard");
         setGlassPane(pausePanel);
         showView("menu");
 
@@ -41,6 +44,7 @@ public class SView extends JFrame {
     }
 
     public void showPauseDialog() {
+        setGlassPane(pausePanel);
         pausePanel.setVisible(true);
         repaint();
     }
@@ -79,6 +83,10 @@ public class SView extends JFrame {
         showView("game");
     }
 
+    public void showLeaderboard() {
+        showView("leaderboard");
+    }
+
     public String getCurrentViewName() {
         return currentViewName;
     }
@@ -100,7 +108,7 @@ public class SView extends JFrame {
     }
 
     public String showAuth() {
-        return JOptionPane.showInputDialog(this, "Username:", "Auth");
+        return JOptionPane.showInputDialog(this, "Username:");
     }
 
 }
