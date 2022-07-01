@@ -22,10 +22,9 @@ public class SView extends JFrame {
     public SView(SModel model) {
         super("Snake");
         setLayout(cardLayout);
-        setJMenuBar(createMenuBar());
+        setJMenuBar(new SMenuBar());
 
         this.model = model;
-        setJMenuBar(createMenuBar());
         menuPanel = new MenuPanel();
         gamePanel = new GamePanel(model.getGame());
         pausePanel = new PausePanel();
@@ -100,47 +99,6 @@ public class SView extends JFrame {
         repaint();
     }
 
-    private JMenuBar createMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-
-        JMenu setting = new JMenu("Setting");
-        JMenu account = new JMenu("Account");
-        JMenu menu = new JMenu("Menu");
-        JMenu difficulty = new JMenu("Difficulty");
-        JMenu snakeColor = new JMenu("Color");
-
-        JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
-        JRadioButtonMenuItem normal = new JRadioButtonMenuItem("Normal");
-        JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
-        ButtonGroup difficultyGroup = new ButtonGroup();
-        difficultyGroup.add(easy);
-        difficultyGroup.add(normal);
-        difficultyGroup.add(hard);
-        normal.setSelected(true);
-
-        JMenuItem blueColor = new JMenuItem("Blue");
-        JMenuItem greenColor = new JMenuItem("Green");
-        JMenuItem pinkColor = new JMenuItem("Pink");
-
-        JMenuItem login = new JMenuItem("Login");
-        JMenuItem logout = new JMenuItem("Logout");
-
-        menuBar.add(menu);
-        menuBar.add(setting);
-        menuBar.add(account);
-        setting.add(difficulty);
-        setting.add(snakeColor);
-        account.add(login);
-        account.add(logout);
-        difficulty.add(easy);
-        difficulty.add(normal);
-        difficulty.add(hard);
-        snakeColor.add(blueColor);
-        snakeColor.add(greenColor);
-        snakeColor.add(pinkColor);
-
-        return menuBar;
-    }
 
 
     public String showAuth() {
