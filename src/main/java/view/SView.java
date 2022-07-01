@@ -31,6 +31,8 @@ public class SView extends JFrame {
         gameOverPanel = new GameOverPanel();
         leaderboardPanel = new LeaderboardPanel(model.getLeaderboard());
 
+        setJMenuBar(createMenuBar());
+
         add(menuPanel, "menu");
         add(gamePanel, "game");
         add(leaderboardPanel, "leaderboard");
@@ -97,6 +99,36 @@ public class SView extends JFrame {
         gamePanel = new GamePanel(model.getGame());
         add(gamePanel, "game");
         repaint();
+    }
+
+    private JMenuBar createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu setting = new JMenu("Setting");
+        JMenu difficulty = new JMenu("Difficulty");
+        JMenu snakeColor = new JMenu("Color");
+
+        JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
+        JRadioButtonMenuItem normal = new JRadioButtonMenuItem("Normal");
+        JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
+        normal.setSelected(true);
+
+        JMenuItem blueColor = new JMenuItem("Blue");
+        JMenuItem greenColor = new JMenuItem("Green");
+        JMenuItem pinkColor = new JMenuItem("Pink");
+
+
+        menuBar.add(setting);
+        setting.add(difficulty);
+        setting.add(snakeColor);
+        difficulty.add(easy);
+        difficulty.add(normal);
+        difficulty.add(hard);
+        snakeColor.add(blueColor);
+        snakeColor.add(greenColor);
+        snakeColor.add(pinkColor);
+
+        return menuBar;
     }
 
     public String showAuth() {
