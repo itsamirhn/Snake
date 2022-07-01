@@ -19,16 +19,10 @@ public class SModel {
         return user;
     }
 
-    public boolean move() throws GameOverException {
-        return game.move();
+    public void run() throws GameOverException {
+        game.run();
     }
 
-    public void generateFood() {
-        game.generateFoodIfNeeded();
-    }
-    public void generateBonusFood(){
-        game.generateBonusFoodIfNeeded();
-    }
     public void changeDirection(Direction direction) {
         game.changeDirection(direction);
     }

@@ -1,27 +1,45 @@
 package model;
 
+import controller.SnakeListener;
+import utilitis.SUtils;
+
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Game {
+public class Game implements SnakeListener {
 
     private final Board board;
     private final Snake snake;
-    private final List<Food> foods = new ArrayList<>();
+    private SnakeListener snakeListener;
+    private final List<Food> availableFoods = new LinkedList<>();
+    private final float bonusFoodProbability = 0.05f;
+    private int score = 0;
 
     public Game(Dimension boardDimension) {
         board = new Board(boardDimension.width, boardDimension.height);
         snake = new Snake(board.getCell(boardDimension.width / 2, boardDimension.height / 2));
+        snake.setListener(this);
     }
 
     public void changeDirection(Direction direction) {
         snake.changeDirection(direction);
     }
 
-    public boolean move() throws GameOverException {
-        for (Food food: foods) if (food instanceof BonusFood bonusFood && !food.isRemoved()) bonusFood.tiktok();
-        return snake.move();
+    public void run() throws GameOverException {
+        tiktokBonusFoods();
+        clearRemovedFoods();
+        snake.move();
+        generateFoodIfNeeded();
+        generateBonusFoodIfNeeded();
+    }
+
+    public void clearRemovedFoods() {
+        availableFoods.removeIf(Food::isRemoved);
+    }
+
+    public void tiktokBonusFoods() {
+        for (Food food: availableFoods) if (food instanceof BonusFood bonusFood) bonusFood.tiktok();
     }
 
     public Board getBoard() {
@@ -34,24 +52,33 @@ public class Game {
 
     public void forceGenerateFood() {
         Food food = new Food(board.getRandomEmptyCell());
-        foods.add(food);
+        availableFoods.add(food);
     }
     public void forceGenerateBonusFood(){
         BonusFood bonusfood = new BonusFood(board.getRandomEmptyCell());
-        foods.add(bonusfood);
+        availableFoods.add(bonusfood);
     }
 
     public void generateBonusFoodIfNeeded(){
-        boolean c = foods.stream().noneMatch(food -> food instanceof BonusFood && !food.isRemoved());
-        if (c) forceGenerateBonusFood();
+        boolean c = availableFoods.stream().noneMatch(food -> food instanceof BonusFood);
+        if (c && SUtils.getRandomProbability(bonusFoodProbability)) forceGenerateBonusFood();
     }
     public void generateFoodIfNeeded() {
-        boolean c = foods.stream().noneMatch(food -> !(food instanceof BonusFood) && !food.isRemoved());
+        boolean c = availableFoods.stream().allMatch(food -> food instanceof BonusFood);
         if (c) forceGenerateFood();
     }
 
     public int getScore() {
-        return foods.stream().filter(Food::isEaten).mapToInt(Food::getScore).sum();
+        return score;
     }
 
+    public void setSnakeListener(SnakeListener snakeListener) {
+        this.snakeListener = snakeListener;
+    }
+
+    @Override
+    public void foodEaten(Food food) {
+        score += food.getScore();
+        if (snakeListener != null) snakeListener.foodEaten(food);
+    }
 }

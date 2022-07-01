@@ -17,9 +17,6 @@ public class GameController {
     private final SView view;
     private boolean paused = false;
     private final Timer snakeTimer = new Timer(1_000 / Config.getInstance().snakeFPS, this::move);
-    private final Timer foodTimer = new Timer(1_000 / Config.getInstance().foodFPS, this::generateFood);
-    private final Timer bonusFoodTimer = new Timer(Config.getInstance().bonusFoodInterval, this::generateBonusFood);
-
     private final Stack<Direction> directionStack = new Stack<>();
 
     public GameController(SModel model, SView view) {
@@ -42,7 +39,7 @@ public class GameController {
     }
 
     private void setSnakeListener() {
-        model.getGame().getSnake().setListener(food -> {
+        model.getGame().setSnakeListener(food -> {
             // TODO: Play Sound
             view.getGamePanel().updateScoreLabel();
         });
@@ -107,33 +104,20 @@ public class GameController {
 
     public void startTimers() {
         snakeTimer.start();
-        foodTimer.start();
-        bonusFoodTimer.start();
     }
 
     public void stopTimers() {
         snakeTimer.stop();
-        foodTimer.stop();
-        bonusFoodTimer.stop();
     }
 
     public void move(ActionEvent e) {
         if (paused) return;
         try {
             if (!directionStack.isEmpty()) model.changeDirection(directionStack.pop());
-            model.move();
+            model.run();
         } catch (GameOverException err) {
             gameOver(err);
         }
-    }
-
-    public void generateFood(ActionEvent e) {
-        if (paused) return;
-        model.generateFood();
-    }
-    public void generateBonusFood(ActionEvent e) {
-        if (paused) return;
-        model.generateBonusFood();
     }
 
     public void pause() {

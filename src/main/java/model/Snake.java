@@ -12,7 +12,7 @@ public class Snake {
         body.add(new Body(start));
     }
 
-    public boolean move() throws GameOverException {
+    public void move() throws GameOverException {
         Body head = getHead();
         Cell next = head.getContainer().getNeighbor(direction);
         if (next == null) throw new GameOverException(GameOverException.Cause.WALL_HIT);
@@ -32,7 +32,6 @@ public class Snake {
             Body tail = body.removeLast();
             tail.remove();
         }
-        return true;
     }
 
     public void changeDirection(Direction direction) {
@@ -52,7 +51,7 @@ public class Snake {
         return body;
     }
 
-    public void setListener(SnakeListener listener) {
+    protected void setListener(SnakeListener listener) {
         this.listener = listener;
     }
 }

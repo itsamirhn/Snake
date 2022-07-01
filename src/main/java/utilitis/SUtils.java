@@ -9,6 +9,10 @@ import java.io.IOException;
 
 public class SUtils {
 
+    public static boolean getRandomProbability(float probability) {
+        return Math.random() < probability;
+    }
+
     public static int getRandomInt(int max) {
         return (int) (Math.random() * max);
     }
