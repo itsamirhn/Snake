@@ -8,6 +8,7 @@ public class BonusFood extends Food {
         if (isRemoved()) return;
         timer--;
         if (timer == 0) this.remove();
+        this.getContainer().notifyListener();
     }
     @Override
     public int getScore() {

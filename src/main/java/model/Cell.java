@@ -17,7 +17,7 @@ public class Cell {
     public void setElement(Element element) {
         this.element = element;
         if (this.element != null && this.element.getContainer() != this) this.element.setContainer(this);
-        if (listener != null) listener.cellUpdated(this);
+        notifyListener();
     }
 
     public Cell getNeighbor(Direction direction) {
@@ -34,6 +34,10 @@ public class Cell {
 
     public void setListener(CellListener listener) {
         this.listener = listener;
+    }
+
+    public void notifyListener() {
+        if (listener != null) listener.cellUpdated(this);
     }
 
     @Override
