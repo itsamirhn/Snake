@@ -5,4 +5,13 @@ public interface ButtonListener {
     void restartButtonPressed();
     void saveScoreButtonPressed();
     void leaderboardButtonPressed();
+    void normalDifficultyPressed();
+    void easyDifficultyPressed();
+    void hardDifficultyPressed();
+    void blueColorPressed();
+    void pinkColorPressed();
+    void greenColorPressed();
+    void loginAccountPressed();
+    void logoutAccountPressed();
+    void menuMenuPressed();
 }

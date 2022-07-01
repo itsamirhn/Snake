@@ -1,8 +1,11 @@
 package view;
 
+import controller.ButtonListener;
+
 import javax.swing.*;
 
 public class SMenuBar extends JMenuBar {
+    protected ButtonListener buttonListener;
     private JMenu setting;
     private JMenu account;
     private JMenu menu;
@@ -61,5 +64,37 @@ public class SMenuBar extends JMenuBar {
         snakeColor.add(blueColor);
         snakeColor.add(greenColor);
         snakeColor.add(pinkColor);
+
+        menu.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.menuMenuPressed();
+        });
+        easy.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.easyDifficultyPressed();
+        });
+        normal.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.normalDifficultyPressed();
+        });
+        hard.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.hardDifficultyPressed();
+        });
+        blueColor.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.blueColorPressed();
+        });
+        greenColor.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.greenColorPressed();
+        });
+        pinkColor.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.pinkColorPressed();
+        });
+        login.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.loginAccountPressed();
+        });
+        logout.addActionListener(e -> {
+            if (buttonListener != null) buttonListener.logoutAccountPressed();
+        });
+
+    }
+    public void setButtonListener(ButtonListener buttonListener) {
+        this.buttonListener = buttonListener;
     }
 }
