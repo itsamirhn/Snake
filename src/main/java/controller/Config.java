@@ -12,8 +12,8 @@ public class Config {
     private static final Config instance = new Config(FILE_PATH);
 
     public int snakeFPS = 15;
-    public int foodFPS = 3;
-    public int bonusFoodInterval = 10000;
+    public int bonusFoodMoveTimer = 50;
+    public float bonusFoodChance = 0.008f;
 
     public boolean wallHit = false;
 
@@ -30,8 +30,8 @@ public class Config {
         try {
             Config config = SUtils.loadFromTOML(filePath, Config.class);
             this.snakeFPS = config.snakeFPS;
-            this.foodFPS = config.foodFPS;
-            this.bonusFoodInterval = config.bonusFoodInterval;
+            this.bonusFoodMoveTimer = config.bonusFoodMoveTimer;
+            this.bonusFoodChance = config.bonusFoodChance;
             this.wallHit = config.wallHit;
             this.boardDimension = config.boardDimension;
             this.cellDimension = config.cellDimension;

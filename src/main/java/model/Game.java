@@ -1,5 +1,6 @@
 package model;
 
+import controller.Config;
 import controller.SnakeListener;
 import utilitis.SUtils;
 
@@ -13,7 +14,7 @@ public class Game implements SnakeListener {
     private final Snake snake;
     private SnakeListener snakeListener;
     private final List<Food> availableFoods = new LinkedList<>();
-    private final float bonusFoodProbability = 0.05f;
+    private final float bonusFoodChance = Config.getInstance().bonusFoodChance;
     private int score = 0;
 
     public Game(Dimension boardDimension) {
@@ -61,7 +62,7 @@ public class Game implements SnakeListener {
 
     public void generateBonusFoodIfNeeded(){
         boolean c = availableFoods.stream().noneMatch(food -> food instanceof BonusFood);
-        if (c && SUtils.getRandomProbability(bonusFoodProbability)) forceGenerateBonusFood();
+        if (c && SUtils.getRandomProbability(bonusFoodChance)) forceGenerateBonusFood();
     }
     public void generateFoodIfNeeded() {
         boolean c = availableFoods.stream().allMatch(food -> food instanceof BonusFood);

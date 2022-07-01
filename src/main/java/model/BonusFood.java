@@ -1,7 +1,9 @@
 package model;
 
+import controller.Config;
+
 public class BonusFood extends Food {
-    private int timer = 30;
+    private int timer = Config.getInstance().bonusFoodMoveTimer;
     public void tiktok() {
         if (isRemoved()) return;
         timer--;
