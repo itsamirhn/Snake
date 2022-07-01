@@ -99,6 +99,7 @@ public class SView extends JFrame {
         add(gamePanel, "game");
         repaint();
     }
+
     private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
@@ -109,6 +110,10 @@ public class SView extends JFrame {
         JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
         JRadioButtonMenuItem normal = new JRadioButtonMenuItem("Normal");
         JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
+        ButtonGroup difficultyGroup = new ButtonGroup();
+        difficultyGroup.add(easy);
+        difficultyGroup.add(normal);
+        difficultyGroup.add(hard);
         normal.setSelected(true);
 
         JMenuItem blueColor = new JMenuItem("Blue");
