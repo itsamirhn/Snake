@@ -9,6 +9,7 @@ import view.SView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Stack;
 
 public class GameController {
 
@@ -18,6 +19,8 @@ public class GameController {
     private final Timer snakeTimer = new Timer(1_000 / Config.getInstance().snakeFPS, this::move);
     private final Timer foodTimer = new Timer(1_000 / Config.getInstance().foodFPS, this::generateFood);
     private final Timer bonusFoodTimer = new Timer(Config.getInstance().bonusFoodInterval, this::generateBonusFood);
+
+    private final Stack<Direction> directionStack = new Stack<>();
 
     public GameController(SModel model, SView view) {
         this.model = model;
@@ -79,7 +82,8 @@ public class GameController {
 
         public void changeDirection(Direction direction) {
             if (paused) return;
-            model.changeDirection(direction);
+            if (direction == model.getGame().getSnake().getDirection() || direction == model.getGame().getSnake().getDirection().getOpposite()) return;
+            directionStack.push(direction);
         }
 
         @Override
@@ -116,6 +120,7 @@ public class GameController {
     public void move(ActionEvent e) {
         if (paused) return;
         try {
+            if (!directionStack.isEmpty()) model.changeDirection(directionStack.pop());
             model.move();
         } catch (GameOverException err) {
             gameOver(err);

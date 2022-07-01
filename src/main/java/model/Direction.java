@@ -3,7 +3,7 @@ package model;
 public enum Direction {
     UP, DOWN, LEFT, RIGHT;
 
-    Direction opposite() {
+    public Direction getOpposite() {
         return switch (this) {
             case UP -> DOWN;
             case DOWN -> UP;
