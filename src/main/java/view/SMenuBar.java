@@ -6,52 +6,38 @@ import javax.swing.*;
 
 public class SMenuBar extends JMenuBar {
     protected ButtonListener buttonListener;
-    private JMenu setting;
-    private JMenu account;
-    private JMenu menu;
-    private JMenu difficulty;
-    private JMenu snakeColor;
-    private JRadioButtonMenuItem easy;
-    private JRadioButtonMenuItem normal;
-    private JRadioButtonMenuItem hard;
-    private ButtonGroup difficultyGroup;
-    private JMenuItem blueColor;
-    private JMenuItem greenColor;
-    private JMenuItem pinkColor;
-    private JMenuItem login;
-    private JMenuItem logout;
 
     public SMenuBar() {
-        setting = new JMenu("Setting");
-        account = new JMenu("Account");
-        menu = new JMenu("Menu");
 
+        JMenu game = new JMenu("Game");
+        JMenu setting = new JMenu("Setting");
+        JMenu account = new JMenu("Account");
 
-        difficulty = new JMenu("Difficulty");
-        snakeColor = new JMenu("Color");
+        JMenuItem menu = new JMenuItem("Menu");
 
+        JMenu difficulty = new JMenu("Difficulty");
+        JMenu snakeColor = new JMenu("Color");
 
-        easy = new JRadioButtonMenuItem("Easy");
-        normal = new JRadioButtonMenuItem("Normal");
-        hard = new JRadioButtonMenuItem("Hard");
+        JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
+        JRadioButtonMenuItem normal = new JRadioButtonMenuItem("Normal");
+        JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
 
+        ButtonGroup difficultyGroup = new ButtonGroup();
 
-        difficultyGroup = new ButtonGroup();
+        JMenuItem blueColor = new JMenuItem("Blue");
+        JMenuItem greenColor = new JMenuItem("Green");
+        JMenuItem pinkColor = new JMenuItem("Pink");
 
-        blueColor = new JMenuItem("Blue");
-        greenColor = new JMenuItem("Green");
-        pinkColor = new JMenuItem("Pink");
-
-
-        login = new JMenuItem("Login");
-        logout = new JMenuItem("Logout");
+        JMenuItem login = new JMenuItem("Login");
+        JMenuItem logout = new JMenuItem("Logout");
 
         difficultyGroup.add(easy);
         difficultyGroup.add(normal);
         difficultyGroup.add(hard);
         normal.setSelected(true);
 
-        add(menu);
+        game.add(menu);
+        add(game);
         add(setting);
         add(account);
         setting.add(difficulty);
@@ -66,7 +52,7 @@ public class SMenuBar extends JMenuBar {
         snakeColor.add(pinkColor);
 
         menu.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.menuMenuPressed();
+            if (buttonListener != null) buttonListener.menuGamePressed();
         });
         easy.addActionListener(e -> {
             if (buttonListener != null) buttonListener.easyDifficultyPressed();

@@ -36,7 +36,7 @@ public class SController implements ButtonListener {
 
     @Override
     public void restartButtonPressed() {
-        gameController.restart();
+        gameController.start();
     }
 
     @Override
@@ -48,5 +48,50 @@ public class SController implements ButtonListener {
     @Override
     public void leaderboardButtonPressed() {
         view.showLeaderboard();
+    }
+
+    @Override
+    public void normalDifficultyPressed() {
+        // TODO
+    }
+
+    @Override
+    public void easyDifficultyPressed() {
+        // TODO
+    }
+
+    @Override
+    public void hardDifficultyPressed() {
+        // TODO
+    }
+
+    @Override
+    public void blueColorPressed() {
+        // TODO
+    }
+
+    @Override
+    public void pinkColorPressed() {
+        // TODO
+    }
+
+    @Override
+    public void greenColorPressed() {
+        // TODO
+    }
+
+    @Override
+    public void loginAccountPressed() {
+        // TODO
+    }
+
+    @Override
+    public void logoutAccountPressed() {
+        // TODO
+    }
+
+    @Override
+    public void menuGamePressed() {
+        view.showMenu();
     }
 }

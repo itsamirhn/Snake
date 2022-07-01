@@ -11,6 +11,7 @@ public class SView extends JFrame {
     private final SModel model;
     private final CardLayout cardLayout = new CardLayout();
 
+    private final SMenuBar menuBar = new SMenuBar();
     private final MenuPanel menuPanel;
     private GamePanel gamePanel;
     private final PausePanel pausePanel;
@@ -22,7 +23,6 @@ public class SView extends JFrame {
     public SView(SModel model) {
         super("Snake");
         setLayout(cardLayout);
-        setJMenuBar(new SMenuBar());
 
         this.model = model;
         menuPanel = new MenuPanel();
@@ -31,6 +31,7 @@ public class SView extends JFrame {
         gameOverPanel = new GameOverPanel();
         leaderboardPanel = new LeaderboardPanel(model.getLeaderboard());
 
+        setJMenuBar(menuBar);
         add(menuPanel, "menu");
         add(gamePanel, "game");
         add(leaderboardPanel, "leaderboard");
@@ -86,6 +87,7 @@ public class SView extends JFrame {
     public void setButtonListener(ButtonListener listener) {
         menuPanel.setButtonListener(listener);
         gameOverPanel.setButtonListener(listener);
+        menuBar.setButtonListener(listener);
     }
 
     public GamePanel getGamePanel() {
@@ -98,8 +100,6 @@ public class SView extends JFrame {
         add(gamePanel, "game");
         repaint();
     }
-
-
 
     public String showAuth() {
         return JOptionPane.showInputDialog(this, "Username:");

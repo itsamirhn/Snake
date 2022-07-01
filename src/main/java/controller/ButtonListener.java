@@ -13,5 +13,5 @@ public interface ButtonListener {
     void greenColorPressed();
     void loginAccountPressed();
     void logoutAccountPressed();
-    void menuMenuPressed();
+    void menuGamePressed();
 }
