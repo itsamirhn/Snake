@@ -104,6 +104,8 @@ public class SView extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu setting = new JMenu("Setting");
+        JMenu account = new JMenu("Account");
+        JMenu menu = new JMenu("Menu");
         JMenu difficulty = new JMenu("Difficulty");
         JMenu snakeColor = new JMenu("Color");
 
@@ -120,10 +122,16 @@ public class SView extends JFrame {
         JMenuItem greenColor = new JMenuItem("Green");
         JMenuItem pinkColor = new JMenuItem("Pink");
 
+        JMenuItem login = new JMenuItem("Login");
+        JMenuItem logout = new JMenuItem("Logout");
 
+        menuBar.add(menu);
         menuBar.add(setting);
+        menuBar.add(account);
         setting.add(difficulty);
         setting.add(snakeColor);
+        account.add(login);
+        account.add(logout);
         difficulty.add(easy);
         difficulty.add(normal);
         difficulty.add(hard);
