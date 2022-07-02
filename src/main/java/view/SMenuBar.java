@@ -1,81 +1,84 @@
 package view;
 
 import controller.ButtonListener;
+import controller.Difficulty;
+import utilitis.SUtils;
 
 import javax.swing.*;
 
 public class SMenuBar extends JMenuBar {
+
+    private final String[] availableColorsName = {
+            "BLACK",
+            "BLUE",
+            "CYAN",
+            "DARK_GRAY",
+            "GRAY",
+            "GREEN",
+            "LIGHT_GRAY",
+            "MAGENTA",
+            "ORANGE",
+            "PINK",
+            "RED",
+            "WHITE",
+            "YELLOW"
+    };
     protected ButtonListener buttonListener;
 
     public SMenuBar() {
 
-        JMenu game = new JMenu("Game");
-        JMenu setting = new JMenu("Setting");
-        JMenu account = new JMenu("Account");
+        JMenu gameMenu = new JMenu("Game");
+        JMenu settingMenu = new JMenu("Setting");
+        JMenu accountMenu = new JMenu("Account");
 
-        JMenuItem menu = new JMenuItem("Menu");
+        JMenuItem menuItem = new JMenuItem("Menu");
 
-        JMenu difficulty = new JMenu("Difficulty");
-        JMenu snakeColor = new JMenu("Color");
+        JMenu difficultyMenu = new JMenu("Difficulty");
+        JMenu snakeColorMenu = new JMenu("Color");
 
-        JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
-        JRadioButtonMenuItem normal = new JRadioButtonMenuItem("Normal");
-        JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
 
         ButtonGroup difficultyGroup = new ButtonGroup();
 
-        JMenuItem blueColor = new JMenuItem("Blue");
-        JMenuItem greenColor = new JMenuItem("Green");
-        JMenuItem pinkColor = new JMenuItem("Pink");
+        for (Difficulty difficulty : Difficulty.values()) {
+            JRadioButton difficultyItem = new JRadioButton(difficulty.toString());
+            difficultyItem.addActionListener(e -> {
+                if (buttonListener != null) buttonListener.changeDifficultyPressed(difficulty);
+            });
+            difficultyGroup.add(difficultyItem);
+            difficultyMenu.add(difficultyItem);
+            if (difficulty == Difficulty.NORMAL) difficultyItem.setSelected(true);
+        }
 
-        JMenuItem login = new JMenuItem("Login");
-        JMenuItem logout = new JMenuItem("Logout");
+        for (String colorName : availableColorsName) {
+            JMenuItem colorItem = new JMenuItem(colorName);
+            colorItem.addActionListener(e -> {
+                if (buttonListener != null) buttonListener.changeColorPressed(SUtils.getColorByName(colorName));
+            });
+            snakeColorMenu.add(colorItem);
+        }
 
-        difficultyGroup.add(easy);
-        difficultyGroup.add(normal);
-        difficultyGroup.add(hard);
-        normal.setSelected(true);
 
-        game.add(menu);
-        add(game);
-        add(setting);
-        add(account);
-        setting.add(difficulty);
-        setting.add(snakeColor);
-        account.add(login);
-        account.add(logout);
-        difficulty.add(easy);
-        difficulty.add(normal);
-        difficulty.add(hard);
-        snakeColor.add(blueColor);
-        snakeColor.add(greenColor);
-        snakeColor.add(pinkColor);
+        JMenuItem loginItem = new JMenuItem("Login");
+        JMenuItem logoutItem = new JMenuItem("Logout");
 
-        menu.addActionListener(e -> {
+        gameMenu.add(menuItem);
+        add(gameMenu);
+        add(settingMenu);
+        add(accountMenu);
+
+        settingMenu.add(difficultyMenu);
+        settingMenu.add(snakeColorMenu);
+
+        accountMenu.add(loginItem);
+        accountMenu.add(logoutItem);
+
+        menuItem.addActionListener(e -> {
             if (buttonListener != null) buttonListener.menuGamePressed();
         });
-        easy.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.easyDifficultyPressed();
-        });
-        normal.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.normalDifficultyPressed();
-        });
-        hard.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.hardDifficultyPressed();
-        });
-        blueColor.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.blueColorPressed();
-        });
-        greenColor.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.greenColorPressed();
-        });
-        pinkColor.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.pinkColorPressed();
-        });
-        login.addActionListener(e -> {
+        loginItem.addActionListener(e -> {
             if (buttonListener != null) buttonListener.loginAccountPressed();
         });
-        logout.addActionListener(e -> {
+        logoutItem.addActionListener(e -> {
             if (buttonListener != null) buttonListener.logoutAccountPressed();
         });
 

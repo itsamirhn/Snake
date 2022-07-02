@@ -1,16 +1,14 @@
 package controller;
 
+import java.awt.*;
+
 public interface ButtonListener {
     void startButtonPressed();
     void restartButtonPressed();
     void saveScoreButtonPressed();
     void leaderboardButtonPressed();
-    void normalDifficultyPressed();
-    void easyDifficultyPressed();
-    void hardDifficultyPressed();
-    void blueColorPressed();
-    void pinkColorPressed();
-    void greenColorPressed();
+    void changeDifficultyPressed(Difficulty difficulty);
+    void changeColorPressed(Color color);
     void loginAccountPressed();
     void logoutAccountPressed();
     void menuGamePressed();
