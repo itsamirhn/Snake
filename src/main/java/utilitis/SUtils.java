@@ -3,22 +3,11 @@ package utilitis;
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 public class SUtils {
-
-    public static Color getColorByName(String name) {
-        try {
-            Field field = Class.forName("java.awt.Color").getField(name);
-            return (Color)field.get(null);
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     public static int getRandomInt(int max) {
         return (int) (Math.random() * max);

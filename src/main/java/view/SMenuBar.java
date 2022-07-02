@@ -2,27 +2,10 @@ package view;
 
 import controller.ButtonListener;
 import controller.Difficulty;
-import utilitis.SUtils;
 
 import javax.swing.*;
 
 public class SMenuBar extends JMenuBar {
-
-    private final String[] availableColorsName = {
-            "BLACK",
-            "BLUE",
-            "CYAN",
-            "DARK_GRAY",
-            "GRAY",
-            "GREEN",
-            "LIGHT_GRAY",
-            "MAGENTA",
-            "ORANGE",
-            "PINK",
-            "RED",
-            "WHITE",
-            "YELLOW"
-    };
     protected ButtonListener buttonListener;
 
     public SMenuBar() {
@@ -34,8 +17,6 @@ public class SMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem("Menu");
 
         JMenu difficultyMenu = new JMenu("Difficulty");
-        JMenu snakeColorMenu = new JMenu("Color");
-
 
         ButtonGroup difficultyGroup = new ButtonGroup();
 
@@ -49,15 +30,6 @@ public class SMenuBar extends JMenuBar {
             if (difficulty == Difficulty.NORMAL) difficultyItem.setSelected(true);
         }
 
-        for (String colorName : availableColorsName) {
-            JMenuItem colorItem = new JMenuItem(colorName);
-            colorItem.addActionListener(e -> {
-                if (buttonListener != null) buttonListener.changeColorPressed(SUtils.getColorByName(colorName));
-            });
-            snakeColorMenu.add(colorItem);
-        }
-
-
         JMenuItem loginItem = new JMenuItem("Login");
         JMenuItem logoutItem = new JMenuItem("Logout");
 
@@ -67,7 +39,6 @@ public class SMenuBar extends JMenuBar {
         add(accountMenu);
 
         settingMenu.add(difficultyMenu);
-        settingMenu.add(snakeColorMenu);
 
         accountMenu.add(loginItem);
         accountMenu.add(logoutItem);

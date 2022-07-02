@@ -4,7 +4,6 @@ import model.SModel;
 import view.SView;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SController implements ButtonListener {
 
@@ -53,11 +52,6 @@ public class SController implements ButtonListener {
 
     @Override
     public void changeDifficultyPressed(Difficulty difficulty) {
-        // TODO
-    }
-
-    @Override
-    public void changeColorPressed(Color color) {
         // TODO
     }
 
