@@ -42,7 +42,7 @@ public class SController implements ButtonListener {
     @Override
     public void saveScoreButtonPressed() {
         if (authController.isAuthenticated()) gameController.saveScore();
-        else authController.show();
+        else authController.login();
     }
 
     @Override
@@ -57,12 +57,12 @@ public class SController implements ButtonListener {
 
     @Override
     public void loginAccountPressed() {
-        // TODO
+        authController.login();
     }
 
     @Override
     public void logoutAccountPressed() {
-        // TODO
+        authController.logout();
     }
 
     @Override

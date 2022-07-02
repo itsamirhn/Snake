@@ -2,11 +2,15 @@ package view;
 
 import controller.ButtonListener;
 import controller.Difficulty;
+import model.User;
 
 import javax.swing.*;
 
 public class SMenuBar extends JMenuBar {
     protected ButtonListener buttonListener;
+
+    private final JMenuItem loginItem = new JMenuItem("Login");
+    private final JMenuItem logoutItem = new JMenuItem("Logout");
 
     public SMenuBar() {
 
@@ -30,9 +34,6 @@ public class SMenuBar extends JMenuBar {
             if (difficulty == Difficulty.NORMAL) difficultyItem.setSelected(true);
         }
 
-        JMenuItem loginItem = new JMenuItem("Login");
-        JMenuItem logoutItem = new JMenuItem("Logout");
-
         gameMenu.add(menuItem);
         add(gameMenu);
         add(settingMenu);
@@ -42,6 +43,7 @@ public class SMenuBar extends JMenuBar {
 
         accountMenu.add(loginItem);
         accountMenu.add(logoutItem);
+        logoutItem.setVisible(false);
 
         menuItem.addActionListener(e -> {
             if (buttonListener != null) buttonListener.menuGamePressed();
@@ -54,6 +56,19 @@ public class SMenuBar extends JMenuBar {
         });
 
     }
+
+    public void setUser(User user) {
+        if (user == null) {
+            loginItem.setText("Login");
+            loginItem.setEnabled(true);
+            logoutItem.setVisible(false);
+        } else {
+            loginItem.setText("User: " + user.getUsername());
+            loginItem.setEnabled(false);
+            logoutItem.setVisible(true);
+        }
+    }
+
     public void setButtonListener(ButtonListener buttonListener) {
         this.buttonListener = buttonListener;
     }

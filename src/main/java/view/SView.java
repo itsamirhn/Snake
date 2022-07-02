@@ -12,7 +12,7 @@ public class SView extends JFrame {
     private final CardLayout cardLayout = new CardLayout();
 
     private final SMenuBar menuBar = new SMenuBar();
-    private final MenuPanel menuPanel;
+    private final MenuPanel menuPanel = new MenuPanel();
     private GamePanel gamePanel;
     private final PausePanel pausePanel = new PausePanel();
     private final GameOverPanel gameOverPanel = new GameOverPanel();
@@ -26,9 +26,7 @@ public class SView extends JFrame {
         setLayout(cardLayout);
 
         this.model = model;
-        menuPanel = new MenuPanel();
         gamePanel = new GamePanel(model.getGame());
-
         leaderboardPanel = new LeaderboardPanel(model.getLeaderboard());
 
         glassPanel = new JPanel();
@@ -84,6 +82,7 @@ public class SView extends JFrame {
     }
 
     public void showLeaderboard() {
+        leaderboardPanel.setUsers(model.getLeaderboard());
         showView("leaderboard");
     }
 
@@ -99,6 +98,14 @@ public class SView extends JFrame {
 
     public GamePanel getGamePanel() {
         return gamePanel;
+    }
+
+    public LeaderboardPanel getLeaderboardPanel() {
+        return leaderboardPanel;
+    }
+
+    public SMenuBar getSMenuBar() {
+        return menuBar;
     }
 
     public void createNewGamePanel() {

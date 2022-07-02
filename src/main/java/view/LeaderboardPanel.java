@@ -6,11 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LeaderboardPanel extends JPanel {
+
+    private final JTable table;
     public LeaderboardPanel(User[] users) {
         super(new BorderLayout());
-        JTable table = new JTable(new LeaderboardTableModel(users));
+        table = new JTable(new LeaderboardTableModel(users));
         table.getColumnModel().getColumn(0).setMaxWidth(50);
         JScrollPane scrollPanel = new JScrollPane(table);
         add(scrollPanel, BorderLayout.CENTER);
     }
+
+    public void setUsers(User[] users) {
+        table.setModel(new LeaderboardTableModel(users));
+    }
+
 }
