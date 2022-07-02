@@ -11,11 +11,13 @@ public class SView extends JFrame {
     private final SModel model;
     private final CardLayout cardLayout = new CardLayout();
 
-    private final MenuPanel menuPanel;
+    private final SMenuBar menuBar = new SMenuBar();
+    private final MenuPanel menuPanel = new MenuPanel();
     private GamePanel gamePanel;
-    private final PausePanel pausePanel;
-    private final GameOverPanel gameOverPanel;
+    private final PausePanel pausePanel = new PausePanel();
+    private final GameOverPanel gameOverPanel = new GameOverPanel();
     private final LeaderboardPanel leaderboardPanel;
+    private final JPanel glassPanel;
 
     private String currentViewName = "";
 
@@ -24,53 +26,49 @@ public class SView extends JFrame {
         setLayout(cardLayout);
 
         this.model = model;
-        setJMenuBar(createMenuBar());
-        menuPanel = new MenuPanel();
         gamePanel = new GamePanel(model.getGame());
-        pausePanel = new PausePanel();
-        gameOverPanel = new GameOverPanel();
         leaderboardPanel = new LeaderboardPanel(model.getLeaderboard());
 
+        glassPanel = new JPanel();
+        glassPanel.setLayout(new GridLayout(1, 1));
+        glassPanel.setOpaque(false);
+
+        setJMenuBar(menuBar);
         add(menuPanel, "menu");
         add(gamePanel, "game");
         add(leaderboardPanel, "leaderboard");
-        setGlassPane(pausePanel);
+        setGlassPane(glassPanel);
+
         showView("menu");
 
         pack();
+
+        glassPanel.setBorder(BorderFactory.createEmptyBorder(menuBar.getHeight(), 0, 0, 0));
 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void showPauseDialog() {
-        setGlassPane(pausePanel);
-        pausePanel.setVisible(true);
-        repaint();
+        glassPanel.removeAll();
+        glassPanel.add(pausePanel);
+        glassPanel.setVisible(true);
     }
 
     public void hidePauseDialog() {
-        pausePanel.setVisible(false);
-        repaint();
+        glassPanel.removeAll();
+        glassPanel.setVisible(false);
     }
 
     public void showGameOverDialog(String message) {
-        setGlassPane(gameOverPanel);
+        glassPanel.removeAll();
+        glassPanel.add(gameOverPanel);
         gameOverPanel.setMessage(message);
-        gameOverPanel.setVisible(true);
-        repaint();
-    }
-
-    private JMenuBar createMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-
-        JMenu config = new JMenu("Config");
-
-        return menuBar;
+        glassPanel.setVisible(true);
     }
 
     private void showView(String viewName) {
-        getGlassPane().setVisible(false);
+        glassPanel.setVisible(false);
         currentViewName = viewName;
         cardLayout.show(getContentPane(), viewName);
         repaint();
@@ -84,6 +82,7 @@ public class SView extends JFrame {
     }
 
     public void showLeaderboard() {
+        leaderboardPanel.setUsers(model.getLeaderboard());
         showView("leaderboard");
     }
 
@@ -94,10 +93,19 @@ public class SView extends JFrame {
     public void setButtonListener(ButtonListener listener) {
         menuPanel.setButtonListener(listener);
         gameOverPanel.setButtonListener(listener);
+        menuBar.setButtonListener(listener);
     }
 
     public GamePanel getGamePanel() {
         return gamePanel;
+    }
+
+    public LeaderboardPanel getLeaderboardPanel() {
+        return leaderboardPanel;
+    }
+
+    public SMenuBar getSMenuBar() {
+        return menuBar;
     }
 
     public void createNewGamePanel() {

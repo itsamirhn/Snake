@@ -36,17 +36,37 @@ public class SController implements ButtonListener {
 
     @Override
     public void restartButtonPressed() {
-        gameController.restart();
+        gameController.start();
     }
 
     @Override
     public void saveScoreButtonPressed() {
         if (authController.isAuthenticated()) gameController.saveScore();
-        else authController.show();
+        else authController.login();
     }
 
     @Override
     public void leaderboardButtonPressed() {
         view.showLeaderboard();
+    }
+
+    @Override
+    public void changeDifficultyPressed(Difficulty difficulty) {
+        // TODO
+    }
+
+    @Override
+    public void loginAccountPressed() {
+        authController.login();
+    }
+
+    @Override
+    public void logoutAccountPressed() {
+        authController.logout();
+    }
+
+    @Override
+    public void menuGamePressed() {
+        view.showMenu();
     }
 }

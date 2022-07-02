@@ -139,15 +139,11 @@ public class GameController {
     }
 
     public void start() {
+        model.createNewGame();
+        view.createNewGamePanel();
         setListeners();
         show();
         resume();
-    }
-
-    public void restart() {
-        model.createNewGame();
-        view.createNewGamePanel();
-        start();
     }
 
     public void show() {

@@ -5,4 +5,8 @@ public interface ButtonListener {
     void restartButtonPressed();
     void saveScoreButtonPressed();
     void leaderboardButtonPressed();
+    void changeDifficultyPressed(Difficulty difficulty);
+    void loginAccountPressed();
+    void logoutAccountPressed();
+    void menuGamePressed();
 }
