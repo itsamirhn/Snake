@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Config {
 
-    private static final String FILE_PATH = "./config.toml";
+    private static final String FILE_PATH = "config.toml";
     private static final Config instance = new Config(FILE_PATH);
 
     public int snakeFPS = 15;

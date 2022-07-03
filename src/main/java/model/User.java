@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class User {
 
-    private static final String USERS_FILE_PATH = "./.users.toml";
+    private static final String USERS_FILE_PATH = ".users.toml";
 
     public static final ArrayList<User> allUsers = loadUsers();
 

@@ -10,8 +10,15 @@ import javax.sound.sampled.LineEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 
 public class SUtils {
+
+    public static File getResourceFile(String path) throws FileNotFoundException {
+        URL url = SUtils.class.getClassLoader().getResource(path);
+        if (url == null) throw new FileNotFoundException("Resource not found: " + path);
+        return new File(url.getFile());
+    }
 
     public static boolean getRandomProbability(float probability) {
         return Math.random() < probability;
@@ -25,7 +32,7 @@ public class SUtils {
     }
 
     public static Toml loadTOML(String filePath) throws FileNotFoundException {
-        File file = new File(filePath);
+        File file = getResourceFile(filePath);
         if (!file.exists()) throw new FileNotFoundException();
         return new Toml().read(file);
     }
@@ -42,7 +49,7 @@ public class SUtils {
         new Thread(() -> {
             try {
                 Clip clip = AudioSystem.getClip();
-                AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("assets/sounds/" + name));
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getResourceFile("sounds/%s.wav".formatted(name)));
                 clip.open(inputStream);
                 clip.addLineListener(event -> { if (event.getType() == LineEvent.Type.STOP) clip.close(); });
                 clip.start();

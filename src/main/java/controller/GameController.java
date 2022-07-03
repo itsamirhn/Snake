@@ -38,7 +38,7 @@ public class GameController {
 
     private void setSnakeListener() {
         model.getGame().setSnakeListener(food -> {
-            SUtils.playSoundByName("food.wav");
+            SUtils.playSoundByName("food");
             view.getGamePanel().updateScoreLabel();
         });
     }
@@ -113,7 +113,7 @@ public class GameController {
         try {
             if (!directionStack.isEmpty()) {
                 Direction direction = directionStack.pop();
-                SUtils.playSoundByName("directions/" + direction.toString().toLowerCase() + ".wav");
+                SUtils.playSoundByName("directions/" + direction.toString().toLowerCase());
                 model.changeDirection(direction);
             }
             model.run();
@@ -137,7 +137,7 @@ public class GameController {
     public void gameOver(GameOverException err) {
         paused = true;
         stopTimers();
-        SUtils.playSoundByName("gameOver.wav");
+        SUtils.playSoundByName("gameOver");
         view.showGameOverDialog(err.getMessage());
     }
 
