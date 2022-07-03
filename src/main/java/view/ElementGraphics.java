@@ -19,7 +19,14 @@ public abstract class ElementGraphics {
             drawHead(container, g2d, head);
         } else if (element instanceof Body body) {
             drawBody(container, g2d, body);
+        } else if (element instanceof Block block) {
+            drawBlock(container, g2d, block);
         }
+    }
+
+    private static void drawBlock(JComponent container, Graphics2D g2d, Block block) {
+        g2d.setColor(Color.GRAY);
+        g2d.fillRect(0, 0, container.getWidth(), container.getHeight());
     }
 
     private static void drawBody(JComponent container, Graphics2D g2d, Body body) {

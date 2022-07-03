@@ -5,7 +5,7 @@ import view.SView;
 
 import javax.swing.*;
 
-public class SController implements ButtonListener {
+public class SController implements EventListener {
 
     private final SModel model = new SModel();
     private final SView view = new SView(model);

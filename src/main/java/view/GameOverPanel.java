@@ -20,12 +20,12 @@ public class GameOverPanel extends SPanel {
 
         JButton saveButton = new JButton("Save Score");
         saveButton.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.saveScoreButtonPressed();
+            if (eventListener != null) eventListener.saveScoreButtonPressed();
         });
 
         JButton restartButton = new JButton("Restart");
         restartButton.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.restartButtonPressed();
+            if (eventListener != null) eventListener.restartButtonPressed();
         });
 
         add(titleLabel);

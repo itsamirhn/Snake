@@ -1,14 +1,14 @@
 package model;
 
 import controller.SnakeListener;
-import javax.sound.sampled.*;
-import java.io.File;
+
 import java.util.LinkedList;
 
 public class Snake {
     private final LinkedList<Body> body = new LinkedList<>();
     private Direction direction = Direction.RIGHT;
     private SnakeListener listener;
+
     public Snake(Cell start) {
         body.add(new Body(start));
     }
@@ -20,6 +20,7 @@ public class Snake {
         Element nextElement = next.getElement();
         if (nextElement != null) {
             if (nextElement instanceof Body) throw new GameOverException(GameOverException.Cause.SNAKE_HIT_ITSELF);
+            if (nextElement instanceof Block) throw new GameOverException(GameOverException.Cause.BLOCK_HIT);
             if (!(nextElement instanceof Food)) throw new GameOverException(GameOverException.Cause.UNKNOWN);
         }
         if (nextElement instanceof Food food) {

@@ -1,6 +1,6 @@
 package controller;
 
-public interface ButtonListener {
+public interface EventListener {
     void startButtonPressed();
     void restartButtonPressed();
     void saveScoreButtonPressed();

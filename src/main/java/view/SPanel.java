@@ -1,13 +1,13 @@
 package view;
 
-import controller.ButtonListener;
+import controller.EventListener;
 
 import javax.swing.*;
 
 public class SPanel extends JPanel {
-    protected ButtonListener buttonListener;
+    protected EventListener eventListener;
 
-    public void setButtonListener(ButtonListener buttonListener) {
-        this.buttonListener = buttonListener;
+    public void setButtonListener(EventListener eventListener) {
+        this.eventListener = eventListener;
     }
 }

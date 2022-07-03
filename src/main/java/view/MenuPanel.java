@@ -14,11 +14,11 @@ public class MenuPanel extends SPanel {
 
         JButton startButton = new JButton("Start");
         startButton.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.startButtonPressed();
+            if (eventListener != null) eventListener.startButtonPressed();
         });
         JButton leaderboardButton = new JButton("Leaderboard");
         leaderboardButton.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.leaderboardButtonPressed();
+            if (eventListener != null) eventListener.leaderboardButtonPressed();
         });
 
         JLabel aboutLabel = new JLabel("<html>"

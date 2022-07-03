@@ -4,7 +4,6 @@ import controller.Config;
 import controller.SnakeListener;
 import utilitis.SUtils;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,9 +16,20 @@ public class Game implements SnakeListener {
     private final float bonusFoodChance = Config.getInstance().bonusFoodChance;
     private int score = 0;
 
-    public Game(Dimension boardDimension) {
-        board = new Board(boardDimension.width, boardDimension.height);
-        snake = new Snake(board.getCell(boardDimension.width / 2, boardDimension.height / 2));
+    public Game(String[] mapSchema) {
+        int height = mapSchema.length;
+        int width = mapSchema[0].length();
+        board = new Board(width, height);
+        Cell snakeHeadCell = null;
+        for (int y = 0; y < height; y++) {
+            if (mapSchema[y].length() != width) throw new IllegalArgumentException("Map schema is not rectangular");
+            for (int x = 0; x < width; x++) {
+                char c = mapSchema[y].charAt(x);
+                if (c == 'S') snakeHeadCell = board.getCell(x, y);
+                else if (c == 'B') new Block(board.getCell(x, y));
+            }
+        }
+        snake = new Snake(snakeHeadCell);
         snake.setListener(this);
     }
 

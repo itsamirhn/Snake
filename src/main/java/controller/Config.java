@@ -17,8 +17,30 @@ public class Config {
 
     public boolean wallHit = false;
 
-    public Dimension boardDimension = new Dimension(20, 20);
     public Dimension cellDimension = new Dimension(20, 20);
+    public String[] mapSchema = new String[]
+            {
+            "                    ",
+            "             B      ",
+            "                    ",
+            "                    ",
+            "                    ",
+            "                    ",
+            "                    ",
+            "                    ",
+            "                    ",
+            "         S          ",
+            "                    ",
+            "                    ",
+            "             B      ",
+            "                    ",
+            "                    ",
+            "                    ",
+            "                    ",
+            "  B                 ",
+            "                    ",
+            "                    "
+            };
 
 
     public Config() { }
@@ -33,7 +55,6 @@ public class Config {
             this.bonusFoodMoveTimer = config.bonusFoodMoveTimer;
             this.bonusFoodChance = config.bonusFoodChance;
             this.wallHit = config.wallHit;
-            this.boardDimension = config.boardDimension;
             this.cellDimension = config.cellDimension;
         } catch (FileNotFoundException e) {
             saveTo(filePath);

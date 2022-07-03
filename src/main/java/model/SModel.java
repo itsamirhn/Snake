@@ -28,7 +28,7 @@ public class SModel {
     }
 
     public void createNewGame() {
-        game = new Game(Config.getInstance().boardDimension);
+        game = new Game(Config.getInstance().mapSchema);
     }
 
     public int getScore() {

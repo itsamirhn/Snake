@@ -1,13 +1,13 @@
 package view;
 
-import controller.ButtonListener;
+import controller.EventListener;
 import controller.Difficulty;
 import model.User;
 
 import javax.swing.*;
 
 public class SMenuBar extends JMenuBar {
-    protected ButtonListener buttonListener;
+    protected EventListener eventListener;
 
     private final JMenuItem loginItem = new JMenuItem("Login");
     private final JMenuItem logoutItem = new JMenuItem("Logout");
@@ -27,7 +27,7 @@ public class SMenuBar extends JMenuBar {
         for (Difficulty difficulty : Difficulty.values()) {
             JRadioButton difficultyItem = new JRadioButton(difficulty.toString());
             difficultyItem.addActionListener(e -> {
-                if (buttonListener != null) buttonListener.changeDifficultyPressed(difficulty);
+                if (eventListener != null) eventListener.changeDifficultyPressed(difficulty);
             });
             difficultyGroup.add(difficultyItem);
             difficultyMenu.add(difficultyItem);
@@ -46,13 +46,13 @@ public class SMenuBar extends JMenuBar {
         logoutItem.setVisible(false);
 
         menuItem.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.menuGamePressed();
+            if (eventListener != null) eventListener.menuGamePressed();
         });
         loginItem.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.loginAccountPressed();
+            if (eventListener != null) eventListener.loginAccountPressed();
         });
         logoutItem.addActionListener(e -> {
-            if (buttonListener != null) buttonListener.logoutAccountPressed();
+            if (eventListener != null) eventListener.logoutAccountPressed();
         });
 
     }
@@ -69,7 +69,7 @@ public class SMenuBar extends JMenuBar {
         }
     }
 
-    public void setButtonListener(ButtonListener buttonListener) {
-        this.buttonListener = buttonListener;
+    public void setButtonListener(EventListener eventListener) {
+        this.eventListener = eventListener;
     }
 }

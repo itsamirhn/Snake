@@ -1,6 +1,6 @@
 package view;
 
-import controller.ButtonListener;
+import controller.EventListener;
 import model.SModel;
 
 import javax.swing.*;
@@ -90,7 +90,7 @@ public class SView extends JFrame {
         return currentViewName;
     }
 
-    public void setButtonListener(ButtonListener listener) {
+    public void setButtonListener(EventListener listener) {
         menuPanel.setButtonListener(listener);
         gameOverPanel.setButtonListener(listener);
         menuBar.setButtonListener(listener);

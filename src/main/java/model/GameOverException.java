@@ -3,6 +3,7 @@ package model;
 public class GameOverException extends Exception {
     public enum Cause {
         WALL_HIT("Snake hit a wall"),
+        BLOCK_HIT("Snake hit a block"),
         SNAKE_HIT_ITSELF("Snake hit itself"),
         UNKNOWN("Unknown cause");
 
