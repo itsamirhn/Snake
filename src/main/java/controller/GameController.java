@@ -4,6 +4,7 @@ import model.Cell;
 import model.Direction;
 import model.GameOverException;
 import model.SModel;
+import utilitis.SUtils;
 import view.SView;
 
 import javax.swing.*;
@@ -41,6 +42,7 @@ public class GameController {
     private void setSnakeListener() {
         model.getGame().setSnakeListener(food -> {
             // TODO: Play Sound
+            SUtils.playSoundByName("Apple-Crunch.wav");
             view.getGamePanel().updateScoreLabel();
         });
     }
