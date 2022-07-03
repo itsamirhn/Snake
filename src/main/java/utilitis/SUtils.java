@@ -36,18 +36,15 @@ public class SUtils {
         new TomlWriter().write(obj, file);
     }
     public static void playSoundByName(String name) {
-        try {
-            File file = new File("assets/" + name);
-            AudioInputStream stream = AudioSystem.getAudioInputStream(file);
-            AudioFormat format = stream.getFormat();
-            DataLine.Info info = new DataLine.Info(Clip.class, format);
-            Clip clip = (Clip) AudioSystem.getLine(info);
-            clip.open(stream);
-            clip.start();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error playing sound: " + name);
-        }
+        new Thread(() -> {
+            try {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(new File("assets/sounds/" + name)));
+                clip.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Error playing sound: " + name);
+            }
+        }).start();
     }
 }
