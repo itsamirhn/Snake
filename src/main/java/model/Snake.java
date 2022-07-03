@@ -1,7 +1,8 @@
 package model;
 
 import controller.SnakeListener;
-
+import javax.sound.sampled.*;
+import java.io.File;
 import java.util.LinkedList;
 
 public class Snake {
