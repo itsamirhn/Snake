@@ -78,7 +78,6 @@ public class GameController {
         public void changeDirection(Direction direction) {
             if (paused) return;
             if (direction == model.getGame().getSnake().getDirection() || direction == model.getGame().getSnake().getDirection().getOpposite()) return;
-            SUtils.playSoundByName("directions/" + direction.toString().toLowerCase() + ".wav");
             directionStack.push(direction);
         }
 
@@ -112,7 +111,11 @@ public class GameController {
     public void run(ActionEvent e) {
         if (paused) return;
         try {
-            if (!directionStack.isEmpty()) model.changeDirection(directionStack.pop());
+            if (!directionStack.isEmpty()) {
+                Direction direction = directionStack.pop();
+                SUtils.playSoundByName("directions/" + direction.toString().toLowerCase() + ".wav");
+                model.changeDirection(direction);
+            }
             model.run();
         } catch (GameOverException err) {
             gameOver(err);
