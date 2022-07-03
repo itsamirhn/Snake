@@ -32,7 +32,7 @@ public class SUtils {
     }
 
     public static Toml loadTOML(String filePath) throws FileNotFoundException {
-        File file = getResourceFile(filePath);
+        File file = new File(filePath);
         if (!file.exists()) throw new FileNotFoundException();
         return new Toml().read(file);
     }

@@ -41,8 +41,8 @@ public class SController implements ButtonListener {
 
     @Override
     public void saveScoreButtonPressed() {
-        if (authController.isAuthenticated()) gameController.saveScore();
-        else authController.login();
+        if (!authController.isAuthenticated()) authController.login();
+        gameController.saveScore();
     }
 
     @Override

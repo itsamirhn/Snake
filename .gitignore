@@ -105,5 +105,7 @@ fabric.properties
 out
 gen
 
+target
+
 config.toml
 .users.toml
