@@ -42,7 +42,7 @@ public class GameController {
     private void setSnakeListener() {
         model.getGame().setSnakeListener(food -> {
             // TODO: Play Sound
-            SUtils.playSoundByName("Apple-Crunch.wav");
+            SUtils.playSoundByName("food.wav");
             view.getGamePanel().updateScoreLabel();
         });
     }

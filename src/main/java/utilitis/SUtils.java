@@ -35,23 +35,19 @@ public class SUtils {
         File file = new File(filePath);
         new TomlWriter().write(obj, file);
     }
-    public static void playSoundByName(String path){
+    public static void playSoundByName(String name) {
         try {
-            File yourFile = new File("assets/" + path);
-            AudioInputStream stream;
-            AudioFormat format;
-            DataLine.Info info;
-            Clip clip;
-
-            stream = AudioSystem.getAudioInputStream(yourFile);
-            format = stream.getFormat();
-            info = new DataLine.Info(Clip.class, format);
-            clip = (Clip) AudioSystem.getLine(info);
+            File file = new File("assets/" + name);
+            AudioInputStream stream = AudioSystem.getAudioInputStream(file);
+            AudioFormat format = stream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            Clip clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
             clip.start();
         }
         catch (Exception e) {
-            System.out.println("404.File Not Found.");
+            e.printStackTrace();
+            System.out.println("Error playing sound: " + name);
         }
     }
 }
