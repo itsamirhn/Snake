@@ -78,6 +78,7 @@ public class GameController {
         public void changeDirection(Direction direction) {
             if (paused) return;
             if (direction == model.getGame().getSnake().getDirection() || direction == model.getGame().getSnake().getDirection().getOpposite()) return;
+            SUtils.playSoundByName("directions/" + direction.toString().toLowerCase() + ".wav");
             directionStack.push(direction);
         }
 
