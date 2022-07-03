@@ -3,7 +3,10 @@ package utilitis;
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,15 +38,16 @@ public class SUtils {
         File file = new File(filePath);
         new TomlWriter().write(obj, file);
     }
-    public static void playSoundByName(String name) {
+    public static synchronized void playSoundByName(String name) {
         new Thread(() -> {
             try {
                 Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(new File("assets/sounds/" + name)));
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("assets/sounds/" + name));
+                clip.open(inputStream);
+                clip.addLineListener(event -> { if (event.getType() == LineEvent.Type.STOP) clip.close(); });
                 clip.start();
             } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Error playing sound: " + name);
+                System.err.println(e.getMessage());
             }
         }).start();
     }
