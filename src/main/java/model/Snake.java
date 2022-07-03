@@ -1,7 +1,8 @@
 package model;
 
 import controller.SnakeListener;
-
+import javax.sound.sampled.*;
+import java.io.File;
 import java.util.LinkedList;
 
 public class Snake {
@@ -23,6 +24,23 @@ public class Snake {
         }
         if (nextElement instanceof Food food) {
             food.eat();
+            try {
+                File yourFile = new File("assets/Apple-Crunch.wav");
+                AudioInputStream stream;
+                AudioFormat format;
+                DataLine.Info info;
+                Clip clip;
+
+                stream = AudioSystem.getAudioInputStream(yourFile);
+                format = stream.getFormat();
+                info = new DataLine.Info(Clip.class, format);
+                clip = (Clip) AudioSystem.getLine(info);
+                clip.open(stream);
+                clip.start();
+            }
+            catch (Exception e) {
+                System.out.println("404.File Not Found.");
+            }
             if (listener != null) listener.foodEaten(food);
             Body newHead = new Body(next);
             body.addFirst(newHead);
