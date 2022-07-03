@@ -24,10 +24,12 @@ public class Snake {
         if (nextElement instanceof Food food) {
             food.eat();
             if (listener != null) listener.foodEaten(food);
-            Body newHead = new Body(next);
+            if (body.size() > 1) body.set(0, new Body(body.getFirst().getContainer()));
+            Head newHead = new Head(next);
             body.addFirst(newHead);
         } else {
-            Body newHead = new Body(next);
+            if (body.size() > 1) body.set(0, new Body(body.getFirst().getContainer()));
+            Head newHead = new Head(next);
             body.addFirst(newHead);
             Body tail = body.removeLast();
             tail.remove();

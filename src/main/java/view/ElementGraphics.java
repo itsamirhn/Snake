@@ -1,9 +1,6 @@
 package view;
 
-import model.Body;
-import model.BonusFood;
-import model.Element;
-import model.Food;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +15,20 @@ public abstract class ElementGraphics {
             drawBonusFood(container, g2d, bonusFood);
         } else if (element instanceof Food food) {
             drawFood(container, g2d, food);
+        } else if (element instanceof Head head) {
+            drawHead(container, g2d, head);
         } else if (element instanceof Body body) {
             drawBody(container, g2d, body);
         }
     }
 
     private static void drawBody(JComponent container, Graphics2D g2d, Body body) {
+        g2d.setColor(Color.GREEN.darker());
+        g2d.setStroke(new BasicStroke(BODY_STROKE));
+        g2d.drawRoundRect(BODY_STROKE, BODY_STROKE, container.getWidth() - 2 * BODY_STROKE, container.getHeight()- 2 * BODY_STROKE, BODY_ARC_RADIUS, BODY_ARC_RADIUS);
+    }
+
+    private static void drawHead(JComponent container, Graphics2D g2d, Head head) {
         g2d.setColor(Color.GREEN);
         g2d.setStroke(new BasicStroke(BODY_STROKE));
         g2d.drawRoundRect(BODY_STROKE, BODY_STROKE, container.getWidth() - 2 * BODY_STROKE, container.getHeight()- 2 * BODY_STROKE, BODY_ARC_RADIUS, BODY_ARC_RADIUS);
