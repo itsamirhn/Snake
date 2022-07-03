@@ -1,9 +1,6 @@
 package controller;
 
-import model.Cell;
-import model.Direction;
-import model.GameOverException;
-import model.SModel;
+import model.*;
 import utilitis.SUtils;
 import view.SView;
 
@@ -41,7 +38,6 @@ public class GameController {
 
     private void setSnakeListener() {
         model.getGame().setSnakeListener(food -> {
-            // TODO: Play Sound
             SUtils.playSoundByName("food.wav");
             view.getGamePanel().updateScoreLabel();
         });
@@ -137,6 +133,7 @@ public class GameController {
     public void gameOver(GameOverException err) {
         paused = true;
         stopTimers();
+        SUtils.playSoundByName("gameOver.wav");
         view.showGameOverDialog(err.getMessage());
     }
 
