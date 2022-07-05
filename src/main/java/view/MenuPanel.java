@@ -10,13 +10,18 @@ public class MenuPanel extends SPanel {
         setLayout(new GridLayout(4, 1));
 
         JLabel snakeLabel = new JLabel("SNAKE", SwingConstants.CENTER);
-        snakeLabel.setFont(new Font("Arial", Font.BOLD, 50));
+        snakeLabel.setForeground(new Color(151,123,186));
+        snakeLabel.setFont(new Font("Arial", Font.BOLD, 30));
 
         JButton startButton = new JButton("Start");
+        startButton.setBackground(new Color(151,123,186));
+        startButton.setForeground(Color.BLACK);
         startButton.addActionListener(e -> {
             if (eventListener != null) eventListener.startButtonPressed();
         });
         JButton leaderboardButton = new JButton("Leaderboard");
+        leaderboardButton.setBackground(new Color(151,123,186));
+        leaderboardButton.setForeground(Color.BLACK);
         leaderboardButton.addActionListener(e -> {
             if (eventListener != null) eventListener.leaderboardButtonPressed();
         });
