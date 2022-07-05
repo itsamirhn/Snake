@@ -33,6 +33,9 @@ public class SView extends JFrame {
         glassPanel.setLayout(new GridLayout(1, 1));
         glassPanel.setOpaque(false);
 
+        ImageIcon gameIcon = new ImageIcon("src/main/resources/images/Icon.png");
+        this.setIconImage(gameIcon.getImage());
+
         setJMenuBar(menuBar);
         add(menuPanel, "menu");
         add(gamePanel, "game");
