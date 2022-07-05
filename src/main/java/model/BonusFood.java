@@ -4,7 +4,7 @@ import controller.Config;
 
 public class BonusFood extends Food {
 
-    public static final int MAX_TIMER = Config.getInstance().bonusFoodMoveTimer;
+    public static final int MAX_TIMER = Config.getInstance().getBonusFoodMoveTimer();
     private int timer = MAX_TIMER;
     public void tiktok() {
         if (isRemoved()) return;

@@ -52,7 +52,7 @@ public class SController implements EventListener {
 
     @Override
     public void changeDifficultyPressed(Difficulty difficulty) {
-        // TODO
+        Config.getInstance().setDifficulty(difficulty);
     }
 
     @Override

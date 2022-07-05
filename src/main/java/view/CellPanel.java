@@ -14,7 +14,7 @@ public class CellPanel extends JPanel {
 
     public CellPanel(Cell cell) {
         this.cell = cell;
-        setPreferredSize(Config.getInstance().cellDimension);
+        setPreferredSize(Config.getInstance().getCellDimension());
         setBackground(Color.BLACK);
         validate();
     }

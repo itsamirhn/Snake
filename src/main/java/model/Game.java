@@ -13,7 +13,7 @@ public class Game implements SnakeListener {
     private final Snake snake;
     private SnakeListener snakeListener;
     private final List<Food> availableFoods = new LinkedList<>();
-    private final float bonusFoodChance = Config.getInstance().bonusFoodChance;
+    private final float bonusFoodChance = Config.getInstance().getBonusFoodChance();
     private int score = 0;
 
     public Game(String[] mapSchema) {

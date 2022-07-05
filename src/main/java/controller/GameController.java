@@ -14,7 +14,7 @@ public class GameController {
     private final SModel model;
     private final SView view;
     private boolean paused = false;
-    private final Timer snakeTimer = new Timer(1_000 / Config.getInstance().snakeFPS, this::run);
+    private final Timer snakeTimer = new Timer(1_000 / Config.getInstance().getSnakeFPS(), this::run);
     private final Stack<Direction> directionStack = new Stack<>();
 
     public GameController(SModel model, SView view) {

@@ -1,5 +1,6 @@
 package view;
 
+import controller.Config;
 import controller.EventListener;
 import controller.Difficulty;
 import model.User;
@@ -31,7 +32,7 @@ public class SMenuBar extends JMenuBar {
             });
             difficultyGroup.add(difficultyItem);
             difficultyMenu.add(difficultyItem);
-            if (difficulty == Difficulty.NORMAL) difficultyItem.setSelected(true);
+            if (difficulty == Config.getInstance().getDifficulty()) difficultyItem.setSelected(true);
         }
 
         gameMenu.add(menuItem);

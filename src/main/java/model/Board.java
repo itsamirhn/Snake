@@ -25,7 +25,7 @@ public class Board {
                 if (x + 1 < width) cells[x][y].setNeighbor(Direction.DOWN, cells[x + 1][y]);
                 if (y > 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][y - 1]);
                 if (y + 1 < height) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][y + 1]);
-                if (!Config.getInstance().wallHit) {
+                if (!Config.getInstance().canHitWall()) {
                     if (x == 0) cells[x][y].setNeighbor(Direction.UP, cells[width - 1][y]);
                     if (x == width - 1) cells[x][y].setNeighbor(Direction.DOWN, cells[0][y]);
                     if (y == 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][height - 1]);
