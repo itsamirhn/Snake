@@ -53,6 +53,7 @@ public class SController implements EventListener {
     @Override
     public void changeDifficultyPressed(Difficulty difficulty) {
         Config.getInstance().setDifficulty(difficulty);
+        JOptionPane.showMessageDialog(view, "Difficulty will apply next time you start the game.");
     }
 
     @Override

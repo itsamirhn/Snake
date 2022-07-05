@@ -14,13 +14,14 @@ public class GameController {
     private final SModel model;
     private final SView view;
     private boolean paused = false;
-    private final Timer snakeTimer = new Timer(1_000 / Config.getInstance().getSnakeFPS(), this::run);
+    private Timer snakeTimer;
     private final Stack<Direction> directionStack = new Stack<>();
 
     public GameController(SModel model, SView view) {
         this.model = model;
         this.view = view;
         bindKeys();
+        createTimers();
     }
 
     private void setCellListeners() {
@@ -99,6 +100,9 @@ public class GameController {
         }
     }
 
+    public void createTimers() {
+        snakeTimer = new Timer(1_000 / Config.getInstance().getSnakeFPS(), this::run);
+    }
 
     public void startTimers() {
         snakeTimer.start();
@@ -144,6 +148,7 @@ public class GameController {
     public void start() {
         model.createNewGame();
         view.createNewGamePanel();
+        createTimers();
         setListeners();
         show();
         resume();
