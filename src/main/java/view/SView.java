@@ -113,6 +113,7 @@ public class SView extends JFrame {
         gamePanel = new GamePanel(model.getGame());
         add(gamePanel, "game");
         repaint();
+        pack();
     }
 
     public String showAuth() {
