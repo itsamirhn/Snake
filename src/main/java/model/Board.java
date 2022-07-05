@@ -8,28 +8,28 @@ public class Board {
     private final int height;
     private final Cell[][] cells;
 
-    public Board(int width, int height) {
-        this.width = width;
+    public Board(int height, int width) {
         this.height = height;
+        this.width = width;
 
-        cells = new Cell[width][height];
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        cells = new Cell[height][width];
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
                 cells[x][y] = new Cell();
             }
         }
 
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
                 if (x > 0) cells[x][y].setNeighbor(Direction.UP, cells[x - 1][y]);
-                if (x + 1 < width) cells[x][y].setNeighbor(Direction.DOWN, cells[x + 1][y]);
+                if (x + 1 < height) cells[x][y].setNeighbor(Direction.DOWN, cells[x + 1][y]);
                 if (y > 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][y - 1]);
-                if (y + 1 < height) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][y + 1]);
+                if (y + 1 < width) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][y + 1]);
                 if (!Config.getInstance().canHitWall()) {
-                    if (x == 0) cells[x][y].setNeighbor(Direction.UP, cells[width - 1][y]);
-                    if (x == width - 1) cells[x][y].setNeighbor(Direction.DOWN, cells[0][y]);
-                    if (y == 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][height - 1]);
-                    if (y == height - 1) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][0]);
+                    if (x == 0) cells[x][y].setNeighbor(Direction.UP, cells[height - 1][y]);
+                    if (x == height - 1) cells[x][y].setNeighbor(Direction.DOWN, cells[0][y]);
+                    if (y == 0) cells[x][y].setNeighbor(Direction.LEFT, cells[x][width - 1]);
+                    if (y == width - 1) cells[x][y].setNeighbor(Direction.RIGHT, cells[x][0]);
                 }
             }
         }
@@ -49,8 +49,8 @@ public class Board {
     }
 
     public Cell getRandomEmptyCell() {
-        int x = SUtils.getRandomInt(width);
-        int y = SUtils.getRandomInt(height);
+        int x = SUtils.getRandomInt(height);
+        int y = SUtils.getRandomInt(width);
         if (cells[x][y].isEmpty()) {
             return cells[x][y];
         }
@@ -64,8 +64,8 @@ public class Board {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
                 sb.append(cells[x][y]);
             }
             sb.append('\n');

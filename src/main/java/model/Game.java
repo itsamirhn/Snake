@@ -19,16 +19,17 @@ public class Game implements SnakeListener {
     public Game(String[] mapSchema) {
         int height = mapSchema.length;
         int width = mapSchema[0].length();
-        board = new Board(width, height);
+        board = new Board(height, width);
         Cell snakeHeadCell = null;
-        for (int y = 0; y < height; y++) {
-            if (mapSchema[y].length() != width) throw new IllegalArgumentException("Map schema is not rectangular");
-            for (int x = 0; x < width; x++) {
-                char c = mapSchema[y].charAt(x);
-                if (c == 'S') snakeHeadCell = board.getCell(x, y);
-                else if (c == 'B') new Block(board.getCell(x, y));
+        for (int i = 0; i < height; i++) {
+            if (mapSchema[i].length() != width) throw new IllegalArgumentException("Map schema is not rectangular");
+            for (int j = 0; j < width; j++) {
+                char c = mapSchema[i].charAt(j);
+                if (c == 'S') snakeHeadCell = board.getCell(i, j);
+                else if (c == 'B') new Block(board.getCell(i, j));
             }
         }
+        if (snakeHeadCell == null) throw new IllegalArgumentException("Map schema does not contain snake");
         snake = new Snake(snakeHeadCell);
         snake.setListener(this);
     }

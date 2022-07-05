@@ -7,6 +7,6 @@ public class Body extends Element {
 
     @Override
     public String toString() {
-        return "*";
+        return "S";
     }
 }

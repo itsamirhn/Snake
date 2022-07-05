@@ -27,8 +27,8 @@ public class GameController {
     private void setCellListeners() {
         int width = model.getGame().getBoard().getWidth();
         int height = model.getGame().getBoard().getHeight();
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
                 Cell modelCell = model.getGame().getBoard().getCell(x, y);
                 int finalX = x;
                 int finalY = y;
