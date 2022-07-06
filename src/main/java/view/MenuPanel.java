@@ -1,5 +1,7 @@
 package view;
 
+import utilitis.SUtils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +11,11 @@ public class MenuPanel extends SPanel {
         super();
         setLayout(new GridLayout(4, 1));
 
-        JLabel snakeLabel = new JLabel("SNAKE", SwingConstants.CENTER);
+        ImageIcon gameIcon = new ImageIcon(SUtils.getIconPath());
+        Image image = gameIcon.getImage();
+        Image resizedImage = image.getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+        gameIcon = new ImageIcon(resizedImage);
+        JLabel snakeLabel = new JLabel("SNAKE", gameIcon, SwingConstants.CENTER);
         snakeLabel.setFont(new Font("Arial", Font.BOLD, 50));
 
         JButton startButton = new JButton("Start");
