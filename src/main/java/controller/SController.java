@@ -41,9 +41,10 @@ public class SController implements EventListener {
 
     @Override
     public void saveScoreButtonPressed() {
-        if (!authController.isAuthenticated()) authController.login();
-        gameController.saveScore();
-        JOptionPane.showMessageDialog(view, "Your score has been saved!");
+        if (!authController.isAuthenticated() && authController.login()) {
+            gameController.saveScore();
+            JOptionPane.showMessageDialog(view, "Your score has been saved!");
+        }
     }
 
     @Override

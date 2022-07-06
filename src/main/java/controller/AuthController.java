@@ -14,14 +14,16 @@ public class AuthController {
         this.view = view;
     }
 
-    public void login() {
+    public boolean login() {
         logout();
         String username = view.showAuth();
         if (username != null) {
             User user = User.getOrCreate(username);
             model.setUser(user);
             view.getSMenuBar().setUser(user);
+            return true;
         }
+        return false;
     }
 
     public void logout() {

@@ -13,6 +13,8 @@ public class MenuPanel extends SPanel {
         snakeLabel.setFont(new Font("Arial", Font.BOLD, 50));
 
         JButton startButton = new JButton("Start");
+        startButton.setBackground(new Color(151,123,186));
+        startButton.setForeground(Color.BLACK);
         startButton.addActionListener(e -> {
             if (eventListener != null) eventListener.startButtonPressed();
         });

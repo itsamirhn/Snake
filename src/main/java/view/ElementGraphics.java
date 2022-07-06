@@ -30,13 +30,13 @@ public abstract class ElementGraphics {
     }
 
     private static void drawBody(JComponent container, Graphics2D g2d, Body body) {
-        g2d.setColor(Color.GREEN.darker());
+        g2d.setColor(new Color(151,123,186).darker());
         g2d.setStroke(new BasicStroke(BODY_STROKE));
         g2d.drawRoundRect(BODY_STROKE, BODY_STROKE, container.getWidth() - 2 * BODY_STROKE, container.getHeight()- 2 * BODY_STROKE, BODY_ARC_RADIUS, BODY_ARC_RADIUS);
     }
 
     private static void drawHead(JComponent container, Graphics2D g2d, Head head) {
-        g2d.setColor(Color.GREEN);
+        g2d.setColor(new Color(151,123,186));
         g2d.setStroke(new BasicStroke(BODY_STROKE));
         g2d.drawRoundRect(BODY_STROKE, BODY_STROKE, container.getWidth() - 2 * BODY_STROKE, container.getHeight()- 2 * BODY_STROKE, BODY_ARC_RADIUS, BODY_ARC_RADIUS);
     }
