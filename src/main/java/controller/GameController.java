@@ -102,6 +102,7 @@ public class GameController {
     }
 
     public void createTimers() {
+        if (snakeTimer != null) snakeTimer.stop();
         snakeTimer = new Timer(1_000 / Config.getInstance().getSnakeFPS(), this::run);
     }
 
