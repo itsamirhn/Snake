@@ -26,7 +26,6 @@ public class GameOverPanel extends SPanel {
         saveButton.addActionListener(e -> {
             if (eventListener != null) eventListener.saveScoreButtonPressed();
         });
-        saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton restartButton = new JButton("Restart");
         restartButton.setBackground(new Color(151,123,186));
@@ -34,15 +33,20 @@ public class GameOverPanel extends SPanel {
         restartButton.addActionListener(e -> {
             if (eventListener != null) eventListener.restartButtonPressed();
         });
-        restartButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(2, 1));
+        buttonPanel.add(saveButton);
+        buttonPanel.add(restartButton);
+        buttonPanel.setOpaque(false);
+        buttonPanel.setMaximumSize(new Dimension(200, 200));
 
         add(Box.createVerticalGlue());
         add(titleLabel);
         add(Box.createVerticalGlue());
         add(messageLabel);
         add(Box.createVerticalGlue());
-        add(saveButton);
-        add(restartButton);
+        add(buttonPanel);
         add(Box.createVerticalGlue());
 
         setOpaque(false);
