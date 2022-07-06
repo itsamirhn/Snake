@@ -11,9 +11,9 @@ public class GameOverPanel extends SPanel {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JLabel titleLabel = new JLabel("GameOver", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
-        titleLabel.setForeground(Color.WHITE);
+        JLabel titleLabel = new JLabel("Game Over :(", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 45));
+        titleLabel.setForeground(new Color(151,123,186));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         messageLabel.setFont(new Font("Arial", Font.BOLD, 30));
@@ -21,12 +21,16 @@ public class GameOverPanel extends SPanel {
         messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton saveButton = new JButton("Save Score");
+        saveButton.setBackground(new Color(151,123,186));
+        saveButton.setForeground(Color.BLACK);
         saveButton.addActionListener(e -> {
             if (eventListener != null) eventListener.saveScoreButtonPressed();
         });
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton restartButton = new JButton("Restart");
+        restartButton.setBackground(new Color(151,123,186));
+        restartButton.setForeground(Color.BLACK);
         restartButton.addActionListener(e -> {
             if (eventListener != null) eventListener.restartButtonPressed();
         });
