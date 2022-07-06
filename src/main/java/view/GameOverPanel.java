@@ -9,29 +9,37 @@ public class GameOverPanel extends SPanel {
 
     public GameOverPanel() {
         super();
-        setLayout(new GridLayout(4, 1));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("GameOver", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
         titleLabel.setForeground(Color.WHITE);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         messageLabel.setFont(new Font("Arial", Font.BOLD, 30));
         messageLabel.setForeground(Color.WHITE);
+        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton saveButton = new JButton("Save Score");
         saveButton.addActionListener(e -> {
             if (eventListener != null) eventListener.saveScoreButtonPressed();
         });
+        saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton restartButton = new JButton("Restart");
         restartButton.addActionListener(e -> {
             if (eventListener != null) eventListener.restartButtonPressed();
         });
+        restartButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        add(Box.createVerticalGlue());
         add(titleLabel);
+        add(Box.createVerticalGlue());
         add(messageLabel);
+        add(Box.createVerticalGlue());
         add(saveButton);
         add(restartButton);
+        add(Box.createVerticalGlue());
 
         setOpaque(false);
     }
