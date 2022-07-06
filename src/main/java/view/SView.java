@@ -2,6 +2,7 @@ package view;
 
 import controller.EventListener;
 import model.SModel;
+import utilitis.SUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +48,8 @@ public class SView extends JFrame {
 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon gameIcon = new ImageIcon(SUtils.getIconPath());
+        setIconImage(gameIcon.getImage());
     }
 
     public void showPauseDialog() {

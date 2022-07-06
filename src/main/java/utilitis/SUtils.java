@@ -15,9 +15,17 @@ import java.net.URL;
 public class SUtils {
 
     public static File getResourceFile(String path) throws FileNotFoundException {
-        URL url = SUtils.class.getClassLoader().getResource(path);
+        URL url = getResource(path);
         if (url == null) throw new FileNotFoundException("Resource not found: " + path);
         return new File(url.getFile());
+    }
+
+    public static URL getResource(String path) {
+        return SUtils.class.getClassLoader().getResource(path);
+    }
+
+    public static String getIconPath() {
+        return getResource("images/icon.png").getPath();
     }
 
     public static boolean getRandomProbability(float probability) {
