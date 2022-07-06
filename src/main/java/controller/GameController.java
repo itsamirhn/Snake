@@ -39,7 +39,8 @@ public class GameController {
 
     private void setSnakeListener() {
         model.getGame().setSnakeListener(food -> {
-            SUtils.playSoundByName("food");
+            if (food instanceof BonusFood) SUtils.playSoundByName("bonus");
+            else SUtils.playSoundByName("food");
             view.getGamePanel().updateScoreLabel();
         });
     }
