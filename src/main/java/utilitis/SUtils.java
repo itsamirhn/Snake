@@ -7,25 +7,16 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
+import java.io.*;
 
 public class SUtils {
 
-    public static File getResourceFile(String path) throws FileNotFoundException {
-        URL url = getResource(path);
-        if (url == null) throw new FileNotFoundException("Resource not found: " + path);
-        return new File(url.getFile());
+    public static InputStream getResourceAsStream(String path) {
+        return SUtils.class.getClassLoader().getResourceAsStream(path);
     }
 
-    public static URL getResource(String path) {
-        return SUtils.class.getClassLoader().getResource(path);
-    }
-
-    public static String getIconPath() {
-        return getResource("images/icon.png").getPath();
+    public static InputStream getIconAsStream() {
+        return getResourceAsStream("images/icon.png");
     }
 
     public static boolean getRandomProbability(float probability) {
@@ -57,7 +48,8 @@ public class SUtils {
         new Thread(() -> {
             try {
                 Clip clip = AudioSystem.getClip();
-                AudioInputStream inputStream = AudioSystem.getAudioInputStream(getResourceFile("sounds/%s.wav".formatted(name)));
+                InputStream bufferedIn = new BufferedInputStream(getResourceAsStream("sounds/%s.wav".formatted(name)));
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(bufferedIn);
                 clip.open(inputStream);
                 clip.addLineListener(event -> { if (event.getType() == LineEvent.Type.STOP) clip.close(); });
                 clip.start();

@@ -4,6 +4,7 @@ import controller.EventListener;
 import model.SModel;
 import utilitis.SUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
@@ -48,8 +49,13 @@ public class SView extends JFrame {
 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon gameIcon = new ImageIcon(SUtils.getIconPath());
-        setIconImage(gameIcon.getImage());
+
+        try {
+            ImageIcon gameIcon = new ImageIcon(ImageIO.read(SUtils.getIconAsStream()));
+            setIconImage(gameIcon.getImage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void showPauseDialog() {
